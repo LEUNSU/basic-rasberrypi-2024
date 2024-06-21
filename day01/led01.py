@@ -25,7 +25,7 @@ try:
 		time.sleep(1)
 		GPIO.output(red_pin, True)
 		GPIO.output(green_pin, True)
-		GPIO.output(blue_pin, True)00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+		GPIO.output(blue_pin, True)
 		time.sleep(1)
 
 
