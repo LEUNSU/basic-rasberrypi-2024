@@ -1,3 +1,4 @@
+# 인체가 감지가 되면 LED에 불이 들어오게 하기
 import RPi.GPIO as GPIO
 import time
 

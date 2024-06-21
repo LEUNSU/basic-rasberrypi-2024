@@ -1,3 +1,4 @@
+# 스위치를 누르면 LED 깜빡임(빨,초,파 순으로), 다시 스위치 누르면 LED 끄기
 import RPi.GPIO as GPIO
 import time
 

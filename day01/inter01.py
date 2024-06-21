@@ -1,4 +1,4 @@
-#interrupt
+# 스위치 눌러 LED 켜고 끄기
 
 import RPi.GPIO as GPIO
 import time

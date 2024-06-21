@@ -1,3 +1,4 @@
+# 키보드 O/X 입력에 따라 멜로디 나오게 하기
 import RPi.GPIO as GPIO
 import time
 
