@@ -26,3 +26,8 @@ IoT 개발자 라즈베리파이 학습 리포지토리
 
 - sudo git clone https://github.com/WiringPi/WiringPi
 - WiringPi > sudo ./build > gpio -v > gpio readall
+
+## 3일차
+- NC (Normally Close): 평상시에 닫혀있다는 뜻으로, 릴레이에 전류가 흐르면 Open 되므로 평상시에 전원을 on 상태로 유지하다가 신호를 주어 off 할 때 사용
+- NO (Normally Open): 반대로 평상시에 열려있다는 뜻으로, 릴레이에 전류가 흐르면 Close 되므로 평상시에 전원을 off 상태로 유지하다가 신호를 주어 on 할 때 사용
+- COM (Common port): 공통 단자로 전력 또는 외부기기의 한쪽 선을 항상 연결해야 하는 단자
