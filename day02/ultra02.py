@@ -35,10 +35,13 @@ try:
 		distance = measure()
 		print("Distance : %.2f cm" %distance)
 		if distance <= 50:
-			Buzz.start(50) # '50'은  듀티사이클 
-		elif distance > 50:
+			Buzz.start(50) # '50'은  듀티사이클
+			delay = distance / 100
+			time.sleep(delay)
 			Buzz.stop()
-		time.sleep(1)	# 1초마다 거리 측정
-
+			time.sleep(delay)
+		else:
+			Buzz.stop()
+			time.sleep(0.1)
 except KeyboardInterrupt:
 	GPIO.cleanup()
