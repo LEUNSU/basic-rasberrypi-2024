@@ -22,7 +22,7 @@ for segment in segments:
 	GPIO.setup(segment, GPIO.OUT)
 	GPIO.output(segment, GPIO.LOW)
 for digit in digits:
-    	GPIO.setup(digit, GPIO.OUT)
+	GPIO.setup(digit, GPIO.OUT)
 	GPIO.output(segment, GPIO.LOW)
 def number(state):
 	str_number = str(number).zfill(4)
