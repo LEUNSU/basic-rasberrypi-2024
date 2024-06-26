@@ -33,12 +33,13 @@ def number(state):
                          GPIO.output(segments[j], num[digit_value][j])
 
                 GPIO.output(digits[3-i], GPIO.LOW)
-                time.sleep(0.02)
+                time.sleep(0.01)
                 GPIO.output(digits[3-i], GPIO.HIGH)
 
 try:
         while True:
+		for _ in range(50):
+			number(state)
                 state = (state + 1) % 10000
-                number(state)
 except KeyboardInterrupt:
     GPIO.cleanup()
