@@ -35,7 +35,7 @@ def number(state):
                 GPIO.output(digits[3-i], GPIO.LOW)
                 time.sleep(1)
                 GPIO.output(digits[3-i], GPIO.HIGH)
-		time.sleep(0.001)
+                time.sleep(0.001)
 try:
         while True:
                 state = (state + 1) % 10000
