@@ -39,7 +39,7 @@ def number(state):
 
 try:
         while True:
-                for _ in range(50):
+		for _ in range(50):
                         number(state)
                 state = (state + 1) % 10000
 except KeyboardInterrupt:
