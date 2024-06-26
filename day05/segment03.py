@@ -20,12 +20,17 @@ GPIO.setmode(GPIO.BCM)
 for segment in segments:
     GPIO.setup(segment, GPIO.OUT)
 
+def number(state):
+        for i in range(7):
+                GPIO.output(segments[i], num[state][i])
+
+state = 0
+
 try:
     while True:
-        for digit in num:
-            for i in range(7):
-                GPIO.output(segments[i], digit[i])
-            time.sleep(1)
+	number(state)
+	state = (state + 1) % 1000
+	time.sleep(0.1)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
