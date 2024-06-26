@@ -32,8 +32,8 @@ def number(state):
 
 try:
 	while True:
-	number(1,2,3,4)
-        time.sleep(0.1)
+		number(1,2,3,4)
+		time.sleep(0.1)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
