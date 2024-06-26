@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 segments = (21, 22, 23, 24, 25, 26, 27)
-digits = (12, 16, 18, 5)
+digits = (17, 18, 19, 20)
 
 num = [
     (1,1,1,1,1,1,0),  # 0
@@ -19,21 +19,28 @@ num = [
 
 GPIO.setmode(GPIO.BCM)
 for segment in segments:
-    GPIO.setup(segment, GPIO.OUT)
+	GPIO.setup(segment, GPIO.OUT)
+	GPIO.output(segment, GPIO.LOW)
 for digit in digits:
-    GPIO.setup(digit, GPIO.OUT)
-
+    	GPIO.setup(digit, GPIO.OUT)
+	GPIO.output(segment, GPIO.LOW)
 def number(state):
+	str_number = str(number).zfill(4)
 	for i in range(4):
 		for j in range(7):
-			GPIO.output(segments[j],num[[state][i]][j])
+			GPIO.output(segments[j],num[int(str_number[i])][j])
 	GPIO.output(digits[i], GPIO.HIGH)
 	time.sleep(0.1)
+	GPIO.output(digits[i], GPIO.LOW)
+
+state = 1234
+
+number(state)
 
 try:
 	while True:
-		number(1,2,3,4)
-		time.sleep(0.1)
+		number(state)
+		time.sleep(1)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
