@@ -39,13 +39,9 @@ def number(state):
 
 try:
         while True:
-<<<<<<< HEAD
 		for _ in range(50):
-=======
-                state = (state + 1) % 10000
-                for _ in range(50):
->>>>>>> ad6b05d4cad7ffbeba9c2357a93518281f5414e8
-                        number(state)
+             state = (state + 1) % 10000
+                       number(state)
                 # state = (state + 1) % 10000
 except KeyboardInterrupt:
     GPIO.cleanup()
