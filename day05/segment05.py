@@ -1,3 +1,4 @@
+# 0~9999까지의 숫자가 1씩 증가하며 순환하도록 만들기
 import RPi.GPIO as GPIO
 import time
 
@@ -33,7 +34,7 @@ def number(state):
                          GPIO.output(segments[j], num[digit_value][j])
 
                 GPIO.output(digits[3-i], GPIO.LOW)
-                time.sleep(0.01)
+                time.sleep(0.001)
                 GPIO.output(digits[3-i], GPIO.HIGH)
 
 try:
