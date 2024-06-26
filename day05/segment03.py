@@ -20,27 +20,22 @@ num = [
 GPIO.setmode(GPIO.BCM)
 for segment in segments:
 	GPIO.setup(segment, GPIO.OUT)
-	GPIO.output(segment, GPIO.LOW)
 for digit in digits:
 	GPIO.setup(digit, GPIO.OUT)
-	GPIO.output(segment, GPIO.LOW)
+
 def number(state):
-	str_number = str(number).zfill(4)
 	for i in range(4):
+		digit_value = state % 10
+		state //= 10
 		for j in range(7):
-			GPIO.output(segments[j],num[int(str_number[i])][j])
-	GPIO.output(digits[i], GPIO.HIGH)
-	time.sleep(0.1)
-	GPIO.output(digits[i], GPIO.LOW)
+			 GPIO.output(segments[j], num[digit_value][j])
 
-state = 1234
-
-number(state)
+		GPIO.output(digits[3-i], GPIO.LOW)
+		time.sleep(0.001)
+		GPIO.output(digits[3-i], GPIO.HIGH)
 
 try:
 	while True:
-		number(state)
-		time.sleep(1)
-
+		number(1234)
 except KeyboardInterrupt:
     GPIO.cleanup()
