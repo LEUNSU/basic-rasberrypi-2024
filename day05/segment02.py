@@ -21,18 +21,18 @@ num = [
 GPIO.setmode(GPIO.BCM)
 for segment in segments:
     GPIO.setup(segment, GPIO.OUT)
-GPIO.setup(switch, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(switch, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 state = 0
 
 def number(state):
 	for i in range(7):
-		GPIO.output(segments[i], num[number][i])
+		GPIO.output(segments[i], num[state][i]) # 각 세그먼트에 대해 ON/OFF 설정
 
 try:
     while True:
         if GPIO.input(switch) == GPIO.HIGH:
-               state = (state + 1) % 10
+               state = (state + 1) % 10  # 숫자를 1 증가시키고 9에서 다시 0으로 순환
                number(state)
                while GPIO.input(switch) == GPIO.HIGH:
                     time.sleep(0.1)
