@@ -23,6 +23,8 @@ for segment in segments:
 for digit in digits:
         GPIO.setup(digit, GPIO.OUT)
 
+state = 0
+
 def number(state):
         for i in range(4):
                 digit_value = state % 10
@@ -31,9 +33,9 @@ def number(state):
                          GPIO.output(segments[j], num[digit_value][j])
 
                 GPIO.output(digits[3-i], GPIO.LOW)
-                time.sleep(0.001)
+                time.sleep(1)
                 GPIO.output(digits[3-i], GPIO.HIGH)
-
+		time.sleep(0.001)
 try:
         while True:
                 state = (state + 1) % 10000
