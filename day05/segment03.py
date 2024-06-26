@@ -28,9 +28,9 @@ state = 0
 
 try:
     while True:
-	number(state)
-	state = (state + 1) % 1000
-	time.sleep(0.1)
+        number(state)
+        state = (state + 1) % 1000
+        time.sleep(0.1)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
