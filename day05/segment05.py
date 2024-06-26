@@ -39,6 +39,8 @@ def number(state):
 
 try:
         while True:
+                # 'number(state)' 함수를 50번 호출하여 현재 숫자를 디스플레이에 충분히 오래 표시
+                # '_'는 루프 변수를 의미하지만, 여기서는 값이 사용되지 않기 때문에 관습적으로 표기
                 state = (state + 1) % 10000
                 for _ in range(50):
                         number(state)
