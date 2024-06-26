@@ -64,3 +64,6 @@ IoT 개발자 라즈베리파이 학습 리포지토리
     http://192.168.5.3:10011/?이름=이은수&주소=서울 
     ```
 ## 4일차
+- FND 모듈
+
+    ![FND 7세그먼트](https://raw.githubusercontent.com/LEUNSU/basic-rasberrypi-2024/main/images/001.png)
