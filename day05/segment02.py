@@ -31,12 +31,12 @@ def number(state):
 
 try:
     while True:
-	if GPIO.input(switch) == GPIO.HIGH:
-		state = (state + 1) % 10
-	number(state)
-	while GPIO.input(switch) == GPIO.HIGH:
-		time.sleep(0.1)
-	time.sleep(0.1)
+        if GPIO.input(switch) == GPIO.HIGH:
+               state = (state + 1) % 10
+               number(state)
+               while GPIO.input(switch) == GPIO.HIGH:
+                    time.sleep(0.1)
+        time.sleep(0.1)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
