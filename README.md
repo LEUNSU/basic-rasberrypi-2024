@@ -69,3 +69,6 @@ IoT 개발자 라즈베리파이 학습 리포지토리
     ![FND 7세그먼트](https://raw.githubusercontent.com/LEUNSU/basic-rasberrypi-2024/main/images/001.png)
 
 ## 5일차
+
+## 6일차
+- 라즈베리파이 linenumber : Alt + Shift + 3
