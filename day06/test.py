@@ -75,27 +75,27 @@ class WindowClass(QMainWindow, form_class):
                 print("Alarm OFF")
 
 class MyClock(QtWidgets.QWidget):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("시계")
-        self.setFixedSize(250, 100)
-        self.show()
-	self.layout = QtWidgets.QVBoxLayout()
-        self.lcd = QtWidgets.QLCDNumber()
-        self.lcd.setSegmentStyle(QtWidgets.QLCDNumber.Flat)
-        self.lcd.setDigitCount(8)
-        self.lcd.setFrameStyle(QtWidgets.QFrame.NoFrame)
-        self.layout.addWidget(self.lcd)
-        self.setLayout(self.layout)
-	self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.show_time)
-        self.timer.start(1000)
-        self.show_time()
-
-	def show_time(self):
-        time = QtCore.QTime.currentTime()
-        self.currentTime = time.toString('hh:mm:ss')
-        self.lcd.display(self.currentTime)
+        def __init__(self):
+                super().__init__()
+                self.setWindowTitle("시계")
+                self.setFixedSize(250, 100)
+                self.show()
+                self.layout = QtWidgets.QVBoxLayout()
+                self.lcd = QtWidgets.QLCDNumber()
+                self.lcd.setSegmentStyle(QtWidgets.QLCDNumber.Flat)
+                self.lcd.setDigitCount(8)       
+                self.lcd.setFrameStyle(QtWidgets.QFrame.NoFrame)
+                self.layout.addWidget(self.lcd)
+                self.setLayout(self.layout)
+                self.timer = QtCore.QTimer()
+                self.timer.timeout.connect(self.show_time)
+                self.timer.start(1000)
+                self.show_time()
+        
+        def show_time(self):
+                time = QtCore.QTime.currentTime()
+                self.currentTime = time.toString('hh:mm:ss')
+                self.lcd.display(self.currentTime)
 
 
 def closeEvent(self, event):
@@ -106,5 +106,5 @@ if __name__ == "__main__":
         app = QApplication(sys.argv)
         myWindow = WindowClass()
         myWindow.show()
-	ex = MyClock()
+        ex = MyClock()
         app.exec_()
