@@ -35,7 +35,7 @@ class WindowClass(QMainWindow, form_class):
 #                self.Btn_3.clicked.connect(self.btn03)
 #                self.Btn_4.clicked.connect(self.btn04)
 
-                self.picam2 = None # 카메라 객체 초기화
+#                self.picam2 = None # 카메라 객체 초기화
 
 		#ALARM
                 self.Btn_5.clicked.connect(self.btn05)
@@ -70,6 +70,11 @@ class WindowClass(QMainWindow, form_class):
                 GPIO.output(blue_pin, True)
                 Buzz.start(50)
                 print("Alarm ON")
+
+		# MyClock 위젯을 생성하고 표시
+		self.clock = MyClock()
+		self.clock.show()
+
         def btn06(self):
                 Buzz.stop()
                 GPIO.output(blue_pin, False)
@@ -78,6 +83,7 @@ class WindowClass(QMainWindow, form_class):
 class MyClock(QWidget, form_class2):
         def __init__(self):
                 super().__init__()
+		self.setupUi(self)
                 self.setWindowTitle("시계")
                 self.setFixedSize(250, 100)
 
@@ -89,7 +95,7 @@ class MyClock(QWidget, form_class2):
                 self.lcd.setFrameStyle(QFrame.NoFrame)
                 self.layout.addWidget(self.lcd)
                 self.setLayout(self.layout)
-                
+
                 self.timer = QtCore.QTimer()
                 self.timer.timeout.connect(self.show_time)
                 self.timer.start(1000)
@@ -109,6 +115,4 @@ if __name__ == "__main__":
         app = QApplication(sys.argv)
         myWindow = WindowClass()
         myWindow.show()
-        ex = MyClock()
-        ex.show
         app.exec_()
