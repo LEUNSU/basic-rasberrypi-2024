@@ -23,18 +23,18 @@ class WindowClass(QMainWindow, form_class):
         def __init__(self):
                 super().__init__()
                 self.setupUi(self)
-
-		picam2 = Picamera2()
+                
+                picam2 = Picamera2()
 
 		#LED
                 self.Btn_1.clicked.connect(self.btn01)
                 self.Btn_2.clicked.connect(self.btn02)
 
 		#CAM
-		self.Btn_3.clicked.connect(self.btn03)
-		self.Btn_4.clicked.connect(self.btn04)
-
-		self.picam2 = None # 카메라 객체 초기화
+                self.Btn_3.clicked.connect(self.btn03)
+                self.Btn_4.clicked.connect(self.btn04)
+                
+                self.picam2 = None # 카메라 객체 초기화
 
 		#ALARM
                 self.Btn_5.clicked.connect(self.btn05)
@@ -49,20 +49,20 @@ class WindowClass(QMainWindow, form_class):
                 print("LED OFF")
 
 	#CAM
-	def btn03(self):
-		if not self.picam2:
-            		self.picam2 = Picamera2()
-            		camera_config = self.picam2.create_preview_configuration()
-            		self.picam2.configure(camera_config)
-            		self.picam2.start()
-            		print("Camera ON")
-			self.picam2.capture_file("test1.jpg")
-	def btn04(self):
-		if self.picam2:
-            		self.picam2.stop()
-            		self.picam2.close()
-            		self.picam2 = None
-            		print("Camera OFF")
+        def btn03(self):
+                if not self.picam2:
+                        self.picam2 = Picamera2()
+                        camera_config = self.picam2.create_preview_configuration()
+                        self.picam2.configure(camera_config)
+                        self.picam2.start()
+                        print("Camera ON")
+                        self.picam2.capture_file("test1.jpg")
+        def btn04(self):
+                if self.picam2:
+                        self.picam2.stop()
+                        self.picam2.close()
+                        self.picam2 = None
+                        print("Camera OFF")
 
 	#ALARM
         def btn05(self):
