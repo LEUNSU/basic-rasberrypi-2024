@@ -210,23 +210,4 @@ class MyClock(QWidget, form_class2):
 
                 self.timer = QtCore.QTimer()
                 self.timer.timeout.connect(self.show_time)
-                self.timer.start(1000)
-                self.show_time()
 
-        def show_time(self):
-                current_time = QtCore.QTime.currentTime()
-                self.currentTime = current_time.toString('hh:mm:ss')
-                self.lcd.display(self.currentTime)
-
-
-def closeEvent(self, event):
-        GPIO.cleanup()
-        event.accept()
-
-if __name__ == "__main__":
-        app = QApplication(sys.argv)
-        myWindow = WindowClass()
-        myWindow.show()
-        ex = MyClock()
-        ex.show
-        app.exec_()
