@@ -52,7 +52,7 @@ class WindowClass(QMainWindow, form_class):
 
 	#ALARM
         def btn05(self):
-		GPIO.output(blue_pin, True)
+                GPIO.output(blue_pin, True)
                 Buzz.start(50)
                 print("Alarm ON")
         def btn06(self):
