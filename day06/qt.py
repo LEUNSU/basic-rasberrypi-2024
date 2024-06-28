@@ -15,9 +15,8 @@ class WindowClass(QMainWindow, form_class):
         def __init__(self):
                 super().__init__()
                 self.setupUi(self)
-        
-        self.btn01.clicked(self.btn01)
-        self.btn02.clicked(self.btn02)
+		self.btn01.clicked(self.btn01)
+		self.btn02.clicked(self.btn02)
 
         def btn01(self):
                 GPIO.output(led_pin, False)
