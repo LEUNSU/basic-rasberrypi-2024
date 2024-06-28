@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-from picamera2 import Picamera2
+#from picamera2 import Picamera2
 import sys
 import RPi.GPIO as GPIO
 import time
@@ -24,7 +24,7 @@ class WindowClass(QMainWindow, form_class):
                 super().__init__()
                 self.setupUi(self)
 
-                picam2 = Picamera2()
+                #picam2 = Picamera2()
 
 		#LED
                 self.Btn_1.clicked.connect(self.btn01)
@@ -49,20 +49,20 @@ class WindowClass(QMainWindow, form_class):
                 print("LED OFF")
 
 	#CAM
-        def btn03(self):
-                if not self.picam2:
-                        self.picam2 = Picamera2()
-                        camera_config = self.picam2.create_preview_configuration()
-                        self.picam2.configure(camera_config)
-                        self.picam2.start()
-                        print("Camera ON")
-                        self.picam2.capture_file("test1.jpg")
-        def btn04(self):
-                if self.picam2:
-                        self.picam2.stop()
-                        self.picam2.close()
-                        self.picam2 = None
-                        print("Camera OFF")
+#        def btn03(self):
+#                if not self.picam2:
+#                        self.picam2 = Picamera2()
+#                        camera_config = self.picam2.create_preview_configuration()
+#                        self.picam2.configure(camera_config)
+#                        self.picam2.start()
+#                        print("Camera ON")
+#                        self.picam2.capture_file("test1.jpg")
+#        def btn04(self):
+#                if self.picam2:
+#                        self.picam2.stop()
+#                        self.picam2.close()
+#                        self.picam2 = None
+#                        print("Camera OFF")
 
 	#ALARM
         def btn05(self):
@@ -74,6 +74,30 @@ class WindowClass(QMainWindow, form_class):
                 GPIO.output(blue_pin, False)
                 print("Alarm OFF")
 
+class MyClock(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("시계")
+        self.setFixedSize(250, 100)
+        self.show()
+	self.layout = QtWidgets.QVBoxLayout()
+        self.lcd = QtWidgets.QLCDNumber()
+        self.lcd.setSegmentStyle(QtWidgets.QLCDNumber.Flat)
+        self.lcd.setDigitCount(8)
+        self.lcd.setFrameStyle(QtWidgets.QFrame.NoFrame)
+        self.layout.addWidget(self.lcd)
+        self.setLayout(self.layout)
+	self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.show_time)
+        self.timer.start(1000)
+        self.show_time()
+
+	def show_time(self):
+        time = QtCore.QTime.currentTime()
+        self.currentTime = time.toString('hh:mm:ss')
+        self.lcd.display(self.currentTime)
+
+
 def closeEvent(self, event):
         GPIO.cleanup()
         event.accept()
@@ -82,4 +106,5 @@ if __name__ == "__main__":
         app = QApplication(sys.argv)
         myWindow = WindowClass()
         myWindow.show()
+	ex = MyClock()
         app.exec_()
