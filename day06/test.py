@@ -89,8 +89,8 @@ class MyClock(QWidget, form_class2):
                 self.lcd.setFrameStyle(QFrame.NoFrame)
                 self.layout.addWidget(self.lcd)
                 self.setLayout(self.layout)
-
-		self.timer = QtCore.QTimer()
+                
+                self.timer = QtCore.QTimer()
                 self.timer.timeout.connect(self.show_time)
                 self.timer.start(1000)
                 self.show_time()
@@ -110,5 +110,5 @@ if __name__ == "__main__":
         myWindow = WindowClass()
         myWindow.show()
         ex = MyClock()
-	ex.show
+        ex.show
         app.exec_()
