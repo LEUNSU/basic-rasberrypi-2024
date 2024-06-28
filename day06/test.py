@@ -18,6 +18,7 @@ GPIO.setup(piezoPin, GPIO.OUT)
 Buzz = GPIO.PWM(piezoPin, 440)
 
 form_class = uic.loadUiType("./qt.ui") [0]
+form_class2 = uic.loadUiType("./MyClock.ui") [0]
 
 class WindowClass(QMainWindow, form_class):
         def __init__(self):
@@ -31,8 +32,8 @@ class WindowClass(QMainWindow, form_class):
                 self.Btn_2.clicked.connect(self.btn02)
 
 		#CAM
-                self.Btn_3.clicked.connect(self.btn03)
-                self.Btn_4.clicked.connect(self.btn04)
+#                self.Btn_3.clicked.connect(self.btn03)
+#                self.Btn_4.clicked.connect(self.btn04)
 
                 self.picam2 = None # 카메라 객체 초기화
 
@@ -74,24 +75,24 @@ class WindowClass(QMainWindow, form_class):
                 GPIO.output(blue_pin, False)
                 print("Alarm OFF")
 
-class MyClock(QtWidgets.QWidget):
+class MyClock(QWidget, form_class2):
         def __init__(self):
                 super().__init__()
                 self.setWindowTitle("시계")
                 self.setFixedSize(250, 100)
                 self.show()
-                self.layout = QtWidgets.QVBoxLayout()
-                self.lcd = QtWidgets.QLCDNumber()
-                self.lcd.setSegmentStyle(QtWidgets.QLCDNumber.Flat)
-                self.lcd.setDigitCount(8)       
-                self.lcd.setFrameStyle(QtWidgets.QFrame.NoFrame)
+                self.layout = QWidget.QVBoxLayout()
+                self.lcd = QWidget.QLCDNumber()
+                self.lcd.setSegmentStyle(QWidget.QLCDNumber.Flat)
+                self.lcd.setDigitCount(8)
+                self.lcd.setFrameStyle(QWidget.QFrame.NoFrame)
                 self.layout.addWidget(self.lcd)
                 self.setLayout(self.layout)
                 self.timer = QtCore.QTimer()
                 self.timer.timeout.connect(self.show_time)
                 self.timer.start(1000)
                 self.show_time()
-        
+
         def show_time(self):
                 time = QtCore.QTime.currentTime()
                 self.currentTime = time.toString('hh:mm:ss')
