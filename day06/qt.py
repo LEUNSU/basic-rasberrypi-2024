@@ -33,8 +33,8 @@ class WindowClass(QMainWindow, form_class):
 
 
 		#ALARM
-		self.Btn_5.clicked.connect(self.btn05)
-		self.Btn_6.clicked.connect(self.btn06)
+                self.Btn_5.clicked.connect(self.btn05)
+                self.Btn_6.clicked.connect(self.btn06)
 
 	#LED
         def btn01(self):
@@ -50,13 +50,13 @@ class WindowClass(QMainWindow, form_class):
 	#def btn04(self):
 
 	#ALARM
-	def btn05(self):
-		Buzz.start(50)
-		print("Alarm ON")
-	def btn06(self):
-		Buzz.stop
-		GPIO.output(blue_pin, False)
-		print("Alarm OFF")
+        def btn05(self):
+                Buzz.start(50)
+                print("Alarm ON")
+        def btn06(self):
+                Buzz.stop
+                GPIO.output(blue_pin, False)
+                print("Alarm OFF")
 
 def closeEvent(self, event):
         GPIO.cleanup()
