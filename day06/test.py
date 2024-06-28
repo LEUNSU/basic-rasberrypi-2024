@@ -72,8 +72,8 @@ class WindowClass(QMainWindow, form_class):
                 print("Alarm ON")
 
 		# MyClock 위젯을 생성하고 표시
-		self.clock = MyClock()
-		self.clock.show()
+                self.clock = MyClock()
+                self.clock.show()
 
         def btn06(self):
                 Buzz.stop()
@@ -83,7 +83,7 @@ class WindowClass(QMainWindow, form_class):
 class MyClock(QWidget, form_class2):
         def __init__(self):
                 super().__init__()
-		self.setupUi(self)
+                self.setupUi(self)
                 self.setWindowTitle("시계")
                 self.setFixedSize(250, 100)
 
