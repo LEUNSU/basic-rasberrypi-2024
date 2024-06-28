@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-from picamera2 import PiCamera
+#from picamera2 import PiCamera
 import sys
 import RPi.GPIO as GPIO
 import time
@@ -12,6 +12,7 @@ piezoPin = 26
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(red_pin, GPIO.OUT)
+GPIO.setup(blue_pin, GPIO.OUT)
 GPIO.setup(piezoPin, GPIO.OUT)
 
 Buzz = GPIO.PWM(piezoPin, 440)
@@ -51,10 +52,11 @@ class WindowClass(QMainWindow, form_class):
 
 	#ALARM
         def btn05(self):
+		GPIO.output(blue_pin, True)
                 Buzz.start(50)
                 print("Alarm ON")
         def btn06(self):
-                Buzz.stop
+                Buzz.stop()
                 GPIO.output(blue_pin, False)
                 print("Alarm OFF")
 
