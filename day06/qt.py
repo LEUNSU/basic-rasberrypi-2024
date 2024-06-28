@@ -17,11 +17,11 @@ class WindowClass(QMainWindow, form_class):
                 self.setupUi(self)
 
         def btn01(self):
-		GPIO.output(led_pin, False)
+                GPIO.output(led_pin, False)
                 print("LED ON Button Clicked")
 
         def btn02(self):
-		GPIO.output(red_pin, True)
+                GPIO.output(red_pin, True)
                 print("LED OFF Button Clicked")
 
 if __name__ == "__main__":
@@ -29,8 +29,3 @@ if __name__ == "__main__":
         myWindow = WindowClass()
         myWindow.show()
         app.exec_()
-
-
-
-except KeyboardInterrupt:	#Ctrl + c
-	GPIO.cleanup()
