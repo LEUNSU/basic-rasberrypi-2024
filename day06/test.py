@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import *
-from PyQt5 import uic
+from PyQt5 import uic, QtCore
 #from picamera2 import Picamera2
 import sys
 import RPi.GPIO as GPIO
@@ -80,22 +80,24 @@ class MyClock(QWidget, form_class2):
                 super().__init__()
                 self.setWindowTitle("시계")
                 self.setFixedSize(250, 100)
-                self.show()
-                self.layout = QWidget.QVBoxLayout()
-                self.lcd = QWidget.QLCDNumber()
-                self.lcd.setSegmentStyle(QWidget.QLCDNumber.Flat)
+
+
+                self.layout = QVBoxLayout()
+                self.lcd = QLCDNumber()
+                self.lcd.setSegmentStyle(QLCDNumber.Flat)
                 self.lcd.setDigitCount(8)
-                self.lcd.setFrameStyle(QWidget.QFrame.NoFrame)
+                self.lcd.setFrameStyle(QFrame.NoFrame)
                 self.layout.addWidget(self.lcd)
                 self.setLayout(self.layout)
-                self.timer = QtCore.QTimer()
+
+		self.timer = QtCore.QTimer()
                 self.timer.timeout.connect(self.show_time)
                 self.timer.start(1000)
                 self.show_time()
 
         def show_time(self):
-                time = QtCore.QTime.currentTime()
-                self.currentTime = time.toString('hh:mm:ss')
+                current_time = QtCore.QTime.currentTime()
+                self.currentTime = current_time.toString('hh:mm:ss')
                 self.lcd.display(self.currentTime)
 
 
@@ -108,4 +110,5 @@ if __name__ == "__main__":
         myWindow = WindowClass()
         myWindow.show()
         ex = MyClock()
+	ex.show
         app.exec_()
