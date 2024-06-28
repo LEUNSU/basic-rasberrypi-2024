@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>696</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,7 +54,7 @@
      <property name="flat">
       <bool>false</bool>
      </property>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="Btn_1">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -67,7 +67,7 @@
        <string>ON</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="Btn_2">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -325,4 +325,8 @@
  </widget>
  <resources/>
  <connections/>
+ <slots>
+  <slot>btn01()</slot>
+  <slot>btn02()</slot>
+ </slots>
 </ui>

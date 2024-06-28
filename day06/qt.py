@@ -15,16 +15,24 @@ class WindowClass(QMainWindow, form_class):
         def __init__(self):
                 super().__init__()
                 self.setupUi(self)
-                self.btn01.clicked(self.btn01)
-                self.btn02.clicked(self.btn02)
 
+                self.Btn_1.clicked.connect(self.btn01)
+                self.Btn_2.clicked.connect(self.btn02)
+
+
+	#LED
         def btn01(self):
                 GPIO.output(led_pin, False)
                 print("LED ON Button Clicked")
-
         def btn02(self):
                 GPIO.output(led_pin, True)
                 print("LED OFF Button Clicked")
+
+	#CAM
+	
+
+
+
 
 def closeEvent(self, event):
         GPIO.cleanup()
