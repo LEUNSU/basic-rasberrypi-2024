@@ -81,7 +81,9 @@ class WindowClass(QMainWindow, form_class):
                 if self.sensor_widget is not None:
                         self.sensor_widget.close()
                         self.sensor_widget = None
-
+                
+                        #GPIO.setup(sensor_pin, GPIO.IN)
+                        GPIO.cleanup()
         def show_sensor_widget(self):
                 if self.sensor_widget is None:
                         self.sensor_widget = SensorWidget()
