@@ -47,7 +47,6 @@ class WindowClass(QMainWindow, form_class):
                 self.Btn_7.clicked.connect(self.btn07)
                 self.Btn_8.clicked.connect(self.btn08)
 
-                self.clock = MyClock()
                 self.sensor_widget = None 
 
 
@@ -61,6 +60,7 @@ class WindowClass(QMainWindow, form_class):
                 print("LED OFF")
 	#ALARM
         def btn05(self):
+                self.clock = MyClock()
                 self.clock.show()
 
         def btn06(self):
