@@ -71,8 +71,8 @@ class WindowClass(QMainWindow, form_class):
 	#Temperature,Humidity
         
         def btn07(self):
-                print("pushed")
-                GPIO.setup(sensor_pin, GPIO.IN)
+                #print("pushed")
+                #GPIO.setup(sensor_pin, GPIO.IN)
                 self.sensor_widget = SensorWidget()
                 self.sensor_widget.show()
                 self.increment_log_num()
@@ -84,7 +84,7 @@ class WindowClass(QMainWindow, form_class):
                         self.sensor_widget = None
                 
                         #GPIO.setup(sensor_pin, GPIO.IN)
-                        GPIO.cleanup()
+                        #GPIO.cleanup()
         def show_sensor_widget(self):
                 if self.sensor_widget is None:
                         self.sensor_widget = SensorWidget()
@@ -158,11 +158,11 @@ class SensorWidget(QWidget, form_class3):
               
         def update_sensor_values(self):
                 try:
-                        print("active")
+                        #print("active")
                         GPIO.setup(sensor_pin, GPIO.IN)
                         temp = self.dhtDevice.temperature
                         humid = self.dhtDevice.humidity
-                        print("active2")
+                        #print("active2")
                         if temp is not None and humid is not None:
                                 self.lcdTemp.display(temp)
                                 self.lcdHumid.display(humid)
