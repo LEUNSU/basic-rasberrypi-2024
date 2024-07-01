@@ -104,14 +104,14 @@ class MyClock(QWidget, form_class2):
 
 
 class SensorWidget(QWidget, form_class3):
-	def __init__(self):
+        def __init__(self):
               super().__init__()
               self.setupUi(self)
               self.lcdTemp = self.findChild(QLCDNumber, 'lcdTemp')
               self.lcdHumid = self.findChild(QLCDNumber, 'lcdHumid')
               self.dhtDevice = adafruit_dht.DHT11(board.D17)
               self.update_sensor_values()
-        
+              
         def update_sensor_values(self):
                 try:
                         temp = self.dhtDevice.temperature
