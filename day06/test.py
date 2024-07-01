@@ -107,8 +107,6 @@ class MyClock(QWidget, form_class2):
                 self.dial.setMinimum(1)
                 self.dial.setMaximum(60)
 
-                self.MinLabel = QLabel("Set minutes: 1", self)
-
                 self.timer = QtCore.QTimer(self)
                 self.timer.timeout.connect(self.show_time)
                 self.timer.start(1000)
@@ -119,7 +117,7 @@ class MyClock(QWidget, form_class2):
         def show_time(self):
                 current_time = QtCore.QTime.currentTime()
                 self.currentTime = current_time.toString('hh:mm:ss')
-                self.CurrLcd.display(QLCDNumber,self.currentTime)
+
                 if self.CurrLcd is not None: 
                         self.CurrLcd.display(self.currentTime)
 
