@@ -19,8 +19,6 @@ GPIO.setup(sensor_pin, GPIO.IN)
 
 Buzz = GPIO.PWM(piezoPin, 440)
 
-#dhtDevice = adafruit_dht.DHT11(board.D18)
-
 log_num = 0
 
 form_class = uic.loadUiType("./qt.ui") [0]
@@ -79,34 +77,54 @@ class WindowClass(QMainWindow, form_class):
         
                 
 class MyClock(QWidget, form_class2):
-        def __init__(self):
-                super().__init__()
-                self.setupUi(self)
-                self.setWindowTitle("시계")
-                self.setFixedSize(250, 100)
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setFixedSize(250, 100)
 
+        self.lcd = QLCDNumber(self)
+        self.lcd.setGeometry(10, 10, 230, 50)
+        self.lcd.setSegmentStyle(QLCDNumber.Flat)
+        self.lcd.setDigitCount(8)
+        self.lcd.setFrameStyle(QFrame.NoFrame)
 
-                self.layout = QVBoxLayout()
-                self.lcd = QLCDNumber()
-                self.lcd.setSegmentStyle(QLCDNumber.Flat)
-                self.lcd.setDigitCount(8)
-                self.lcd.setFrameStyle(QFrame.NoFrame)
-                self.layout.addWidget(self.lcd)
-                self.setLayout(self.layout)
+        self.dial = QDial(self)
+        self.dial.setGeometry(10, 70, 100, 100)
+        self.dial.setMinimum(1)
+        self.dial.setMaximum(60)
 
-                self.timer = QtCore.QTimer()
-                self.timer.timeout.connect(self.show_time)
-                self.timer.start(1000)
-                self.show_time()
+        self.label = QLabel("Set minutes: 1", self)
+        self.label.setGeometry(120, 70, 120, 30)
 
-        def show_time(self):
-                current_time = QtCore.QTime.currentTime()
-                self.currentTime = current_time.toString('hh:mm:ss')
-                self.lcd.display(self.currentTime)
+        self.timer = QtCore.QTimer(self)
+        self.timer.timeout.connect(self.show_time)
+        self.timer.start(1000)
+        self.show_time()
 
-        def closeEvent(self, event):
-                GPIO.cleanup()
-                event.accept()
+        self.dial.valueChanged.connect(self.update_label)
+
+    def show_time(self):
+        current_time = QtCore.QTime.currentTime()
+        self.currentTime = current_time.toString('hh:mm:ss')
+        self.lcd.display(self.currentTime)
+
+        if current_time.minute() == self.dial.value() and current_time.second() == 0:
+            self.activate_alarm()
+
+    def update_label(self, value):
+        self.label.setText(f"Set minutes: {value}")
+
+    def activate_alarm(self):
+        GPIO.output(blue_pin, True)
+        Buzz.start(50)
+        print("Alarm ON")
+
+    def closeEvent(self, event):
+        Buzz.stop()
+        GPIO.output(blue_pin, False)
+        GPIO.cleanup()
+        event.accept()
+
 
 class SensorWidget(QWidget, form_class3):
         def __init__(self):
