@@ -74,21 +74,20 @@ class WindowClass(QMainWindow, form_class):
                 self.sensor_widget.show()
                 self.increment_log_num()
 
-        def increment_log_num(self):
-                global log_num
-                log_num += 1
-        
         def btn08(self):
                 if self.sensor_widget is not None:
                         self.sensor_widget.close()
                         self.sensor_widget = None
-                        self.show_sensor_widget()
 
         def show_sensor_widget(self):
                 if self.sensor_widget is None:
                         self.sensor_widget = SensorWidget()
                         self.sensor_widget.show()
-                        self.increment_log_num()
+                        
+        def increment_log_num(self):
+                global log_num
+                log_num += 1
+        
                 
 class MyClock(QWidget, form_class2):
     def __init__(self):
