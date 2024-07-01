@@ -71,17 +71,11 @@ class WindowClass(QMainWindow, form_class):
         def btn07(self):
                 self.sensor_widget = SensorWidget()
                 self.sensor_widget.show()
-                self.sensor_widget.exec_()
                 self.increment_log_num()
 
         def increment_log_num(self):
                 global log_num
                 log_num += 1
-
-        def closeEvent(self, event):
-                GPIO.cleanup()
-                event.accept()
-
 
 class MyClock(QWidget, form_class2):
         def __init__(self):
@@ -137,7 +131,6 @@ class SensorWidget(QWidget, form_class3):
                         print(ex.args[0])
 
                 QtCore.QTimer.singleShot(2000, self.update_sensor_values)
-
 
         def closeEvent(self, event):
                 self.dhtDevice.exit()
