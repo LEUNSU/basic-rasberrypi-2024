@@ -124,7 +124,7 @@ class MyClock(QWidget, form_class2):
                         self.activate_alarm()
 
         def update_label(self, value):
-                self.MinLabel(value)
+                self.MinLabel.setText(f"Set minutes: {value}")
 
         def activate_alarm(self):
                 GPIO.output(blue_pin, True)
