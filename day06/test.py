@@ -118,7 +118,9 @@ class MyClock(QWidget, form_class2):
                 current_time = QtCore.QTime.currentTime()
                 self.currentTime = current_time.toString('hh:mm:ss')
                 self.CurrLcd.display(QLCDNumber,self.currentTime)
-
+                if self.CurrLcd is not None: 
+                        self.CurrLcd.display(self.currentTime)
+                        
                 if current_time.minute() == self.dial.value() and current_time.second() == 0:
                         self.activate_alarm()
 
