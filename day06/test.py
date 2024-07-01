@@ -120,7 +120,7 @@ class SensorWidget(QWidget, form_class3):
               self.lcdHumid = QLCDNumber("Humidity: - %")
               self.dhtDevice = adafruit_dht.DHT11(board.D17)
               self.update_sensor_values()
-
+        
         def update_sensor_values(self):
                 try:
                         temp = self.dhtDevice.temperature
