@@ -9,7 +9,7 @@ import board
 red_pin = 21
 blue_pin = 20
 piezoPin = 26
-sensor_pin = 17
+sensor_pin = 18
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(red_pin, GPIO.OUT)
@@ -19,7 +19,7 @@ GPIO.setup(sensor_pin, GPIO.IN)
 
 Buzz = GPIO.PWM(piezoPin, 440)
 
-dhtDevice = adafruit_dht.DHT11(board.D17)
+dhtDevice = adafruit_dht.DHT11(board.D18)
 
 log_num = 0
 
@@ -70,7 +70,7 @@ class WindowClass(QMainWindow, form_class):
 	#Temperature,Humidity
         def btn07(self):
                 self.sensor_widget = SensorWidget()
-                self.sensor_widget.exec_()
+                self.sensor_widget.show()
 
         def increment_log_num(self):
                 global log_num
@@ -118,7 +118,7 @@ class SensorWidget(QWidget, form_class3):
               self.setupUi(self)
               self.lcdTemp = self.findChild(QLCDNumber, 'lcdTemp')
               self.lcdHumid = self.findChild(QLCDNumber, 'lcdHumid')
-              self.dhtDevice = adafruit_dht.DHT11(board.D17)
+              self.dhtDevice = adafruit_dht.DHT11(board.D18)
               self.update_sensor_values()
               
         def update_sensor_values(self):
