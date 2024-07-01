@@ -156,7 +156,7 @@ class SensorWidget(QWidget, form_class3):
         def update_sensor_values(self):
                 try:
                         print("active")
-
+                        GPIO.setup(sensor_pin, GPIO.IN)
                         temp = self.dhtDevice.temperature
                         humid = self.dhtDevice.humidity
                         print("active2")
