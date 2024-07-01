@@ -9,7 +9,7 @@ import board
 red_pin = 21
 blue_pin = 20
 piezoPin = 26
-sensor_pin = 18
+sensor_pin = 13
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(red_pin, GPIO.OUT)
@@ -77,9 +77,6 @@ class WindowClass(QMainWindow, form_class):
                 global log_num
                 log_num += 1
         
-        def closeEvent(self, event):
-                self.dhtDevice.exit()
-                event.accept()
                 
 class MyClock(QWidget, form_class2):
         def __init__(self):
@@ -111,14 +108,13 @@ class MyClock(QWidget, form_class2):
                 GPIO.cleanup()
                 event.accept()
 
-
 class SensorWidget(QWidget, form_class3):
         def __init__(self):
               super().__init__()
               self.setupUi(self)
               self.lcdTemp = self.findChild(QLCDNumber, 'lcdTemp')
               self.lcdHumid = self.findChild(QLCDNumber, 'lcdHumid')
-              self.dhtDevice = adafruit_dht.DHT11(board.D18)
+              self.dhtDevice = adafruit_dht.DHT11(board.D13)
               self.update_sensor_values()
               
         def update_sensor_values(self):
@@ -136,7 +132,9 @@ class SensorWidget(QWidget, form_class3):
 
                 QtCore.QTimer.singleShot(2000, self.update_sensor_values)
 
-
+        def closeEvent(self, event):
+                GPIO.cleanup()
+                event.accept()
 
 if __name__ == "__main__":
         app = QApplication(sys.argv)
