@@ -15,7 +15,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(red_pin, GPIO.OUT)
 GPIO.setup(blue_pin, GPIO.OUT)
 GPIO.setup(piezoPin, GPIO.OUT)
-GPIO.setup(sensor_pin, GPIO.OUT)
+GPIO.setup(sensor_pin, GPIO.IN)
 
 Buzz = GPIO.PWM(piezoPin, 440)
 
@@ -113,20 +113,10 @@ class SensorWidget(QWidget, form_class3):
               self.update_sensor_values()
               
         def update_sensor_values(self):
-                try:
-                        temp = self.dhtDevice.temperature
-                        humid = self.dhtDevice.humidity
-                        if temp is not None and humid is not None:
-                                self.lcdTemp.display(temp)
-                                self.lcdHumid.display(humid)
-                        else:
-                                self.lcdTemp.display(0)
-                                self.lcdHumid.display(0)
-                except RuntimeError as ex:
-                        print(ex.args[0])
-
-                # Schedule next update
-                QtCore.QTimer.singleShot(2000, self.update_sensor_values)
+                temp = self.dhtDevice.temperature
+                humid = self.dhtDevice.humidity
+                self.lcdTemp.display(temp)
+                self.lcdHumid.display(humid)
 
         def closeEvent(self, event):
                 self.dhtDevice.exit()
