@@ -102,6 +102,7 @@ class MyClock(QWidget, form_class2):
                 self.CurrLcd = self.findChild(QLCDNumber, 'CurrLcd')
                 self.dial = self.findChild(QDial, 'dial')
                 self.MinLabel = self.findChild(QLabel, 'MinLabel')
+                self.timeEdit = self.findChild(QTimeEdit, 'timeEdit')
 
                 self.dial.setMinimum(1)
                 self.dial.setMaximum(60)
@@ -112,6 +113,7 @@ class MyClock(QWidget, form_class2):
                 self.show_time()
 
                 self.dial.valueChanged.connect(self.update_label)
+                self.timeEdit.timeChanged.connect(self.update_timeedit)
 
         def show_time(self):
                 current_time = QtCore.QTime.currentTime()
@@ -125,9 +127,19 @@ class MyClock(QWidget, form_class2):
 
         def update_label(self, value):
                 self.MinLabel.setText(f"{value}")
+                self.update_timeedit()
+
+        def update_timeedit(self):
+                dial_value = self.dial.value()
+                current_time = QtCore.QTime.currentTime()
+                alarm_time = current_time.addSecs(dial_value * 60)
+                self.timeEdit.setTime(alarm_time)
 
         def activate_alarm(self):
-                if self.dial.value() == QtCore.QTime.currentTime().minute():
+                current_time = QtCore.QTime.currentTime()
+                alarm_time = self.timeEdit.time()
+                
+                if current_time.hour() == alarm_time.hour() and current_time.minute() == alarm_time.minute():
                         GPIO.output(blue_pin, True)
                         Buzz.start(50)
                         print("Alarm ON")
