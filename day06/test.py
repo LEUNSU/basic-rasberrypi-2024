@@ -139,7 +139,7 @@ class MyClock(QWidget, form_class2):
                 current_time = QtCore.QTime.currentTime()
                 alarm_time = self.timeEdit.time()
                 
-                if current_time.hour() == alarm_time.hour() and current_time.minute() == alarm_time.minute():
+                if current_time == alarm_time:
                         GPIO.output(blue_pin, True)
                         Buzz.start(50)
                         print("Alarm ON")
