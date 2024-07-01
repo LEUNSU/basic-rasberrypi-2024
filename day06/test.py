@@ -25,9 +25,6 @@ form_class = uic.loadUiType("./qt.ui") [0]
 form_class2 = uic.loadUiType("./MyClock.ui") [0]
 form_class3 = uic.loadUiType("./SensorWidget.ui") [0]
 
-red_pin = True
-blue_pin = True
-
 class WindowClass(QMainWindow, form_class):
         def __init__(self):
                 super().__init__()
