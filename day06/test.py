@@ -42,7 +42,6 @@ class WindowClass(QMainWindow, form_class):
 
 		#Temperature,Humidity
                 self.Btn_7.clicked.connect(self.btn07)
-                self.Btn_8.clicked.connect(self.btn08)
 
 	#LED
         def btn01(self):
@@ -70,13 +69,13 @@ class WindowClass(QMainWindow, form_class):
 	#Temperature,Humidity
         def btn07(self):
                 global log_num
-                temp = dhtDevice.temperature
-                humid = dhtDevice.humidity
-                print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
-                log_num += 1
-
-#        def btn08(self):
-#                dhtDevice.exit()
+		try:
+                	temp = dhtDevice.temperature
+                	humid = dhtDevice.humidity
+                	print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
+                	log_num += 1
+		except RuntimeError as ex:
+			print(ex.args[0])
 
 class MyClock(QWidget, form_class2):
         def __init__(self):
@@ -104,11 +103,12 @@ class MyClock(QWidget, form_class2):
                 self.currentTime = current_time.toString('hh:mm:ss')
                 self.lcd.display(self.currentTime)
 
-#class 
-
 def closeEvent(self, event):
         GPIO.cleanup()
         event.accept()
+
+
+#class
 
 if __name__ == "__main__":
         app = QApplication(sys.argv)
