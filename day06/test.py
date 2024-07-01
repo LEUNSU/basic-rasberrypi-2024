@@ -83,7 +83,7 @@ class WindowClass(QMainWindow, form_class):
                 if self.sensor_widget is None:
                         self.sensor_widget = SensorWidget()
                         self.sensor_widget.show()
-                        
+
         def increment_log_num(self):
                 global log_num
                 log_num += 1
@@ -152,6 +152,7 @@ class SensorWidget(QWidget, form_class3):
               
         def update_sensor_values(self):
                 try:
+                        print("active")
                         temp = self.dhtDevice.temperature
                         humid = self.dhtDevice.humidity
                         if temp is not None and humid is not None:
