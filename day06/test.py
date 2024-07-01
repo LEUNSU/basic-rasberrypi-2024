@@ -121,6 +121,8 @@ class MyClock(QWidget, form_class2):
 
                 if self.CurrLcd is not None: 
                         self.CurrLcd.display(self.currentTime)
+                        
+                self.activate_alarm()
 
         def update_label(self, value):
                 self.MinLabel.setText(f"{value}")
