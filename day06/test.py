@@ -72,8 +72,7 @@ class WindowClass(QMainWindow, form_class):
 	#Temperature,Humidity
         
         def btn07(self):
-                print("pushed")
-                #GPIO.setup(sensor_pin, GPIO.IN)
+                GPIO.setup(sensor_pin, GPIO.IN)
                 self.sensor_widget = SensorWidget()
                 self.sensor_widget.show()
                 self.increment_log_num()
@@ -84,9 +83,8 @@ class WindowClass(QMainWindow, form_class):
                         self.sensor_widget.update_timer.stop()
                         self.sensor_widget.close()
                         self.sensor_widget = None
-                
-                        #GPIO.setup(sensor_pin, GPIO.IN)
-                        #GPIO.cleanup()
+                        GPIO.cleanup(sensor_pin)
+
         def show_sensor_widget(self):
                 if self.sensor_widget is None:
                         self.sensor_widget = SensorWidget()
@@ -155,18 +153,14 @@ class SensorWidget(QWidget, form_class3):
               self.lcdTemp = self.findChild(QLCDNumber, 'lcdTemp')
               self.lcdHumid = self.findChild(QLCDNumber, 'lcdHumid')
               self.dhtDevice = adafruit_dht.DHT11(board.D22)
-              print("156")
               self.update_timer = QtCore.QTimer(self)
               self.update_timer.timeout.connect(self.update_sensor_values)
               self.update_timer.start(2000)
               
         def update_sensor_values(self):
                 try:
-                        print("active")
-                        #GPIO.setup(sensor_pin, GPIO.IN)
                         temp = self.dhtDevice.temperature
                         humid = self.dhtDevice.humidity
-                        print("active2")
                         if temp is not None and humid is not None:
                                 self.lcdTemp.display(temp)
                                 self.lcdHumid.display(humid)
@@ -177,10 +171,10 @@ class SensorWidget(QWidget, form_class3):
                 except RuntimeError as ex:
                         print(ex.args[0])
 
-        def closeEvent(self, event):
-                self.update_timer.stop()
-                self.dhtDevice = None
-                event.accept()
+        # def closeEvent(self, event):
+        #         self.update_timer.stop()
+        #         self.dhtDevice.exit()
+        #         event.accept()
 
 if __name__ == "__main__":
         app = QApplication(sys.argv)
