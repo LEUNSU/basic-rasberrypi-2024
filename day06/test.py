@@ -74,8 +74,10 @@ class WindowClass(QMainWindow, form_class):
                         humid = dhtDevice.humidity
                         print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
                         log_num += 1
-                except RuntimeError as ex:
-                        print(ex.args[0])
+		else:
+			print("Failed to read from DHT sensor")
+		except RuntimeError as ex:
+			print(ex.args[0])
 
 class MyClock(QWidget, form_class2):
         def __init__(self):
