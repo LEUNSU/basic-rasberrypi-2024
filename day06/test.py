@@ -72,9 +72,8 @@ class WindowClass(QMainWindow, form_class):
 	#Temperature,Humidity
         
         def btn07(self):
-                #GPIO.setup(sensor_pin, GPIO.IN)
                 self.sensor_widget = SensorWidget()
-                #self.sensor_widget.show()
+                self.sensor_widget.show()
                 self.increment_log_num()
 
 
@@ -157,6 +156,8 @@ class SensorWidget(QWidget, form_class3):
               self.update_timer.timeout.connect(self.update_sensor_values)
               self.update_timer.start(2000)
               
+              GPIO.setup(sensor_pin, GPIO.IN)
+
         def update_sensor_values(self):
                 try:
                         temp = self.dhtDevice.temperature
