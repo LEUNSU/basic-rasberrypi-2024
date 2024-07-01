@@ -150,6 +150,7 @@ class SensorWidget(QWidget, form_class3):
         def __init__(self):
               super().__init__()
               self.setupUi(self)
+              GPIO.setup(sensor_pin, GPIO.IN)
               self.lcdTemp = self.findChild(QLCDNumber, 'lcdTemp')
               self.lcdHumid = self.findChild(QLCDNumber, 'lcdHumid')
               self.dhtDevice = adafruit_dht.DHT11(board.D13)
@@ -161,7 +162,7 @@ class SensorWidget(QWidget, form_class3):
         def update_sensor_values(self):
                 try:
                         print("active")
-                        GPIO.setup(sensor_pin, GPIO.IN)
+                        #GPIO.setup(sensor_pin, GPIO.IN)
                         temp = self.dhtDevice.temperature
                         humid = self.dhtDevice.humidity
                         print("active2")
