@@ -51,7 +51,7 @@ class WindowClass(QMainWindow, form_class):
                 GPIO.output(red_pin, False)
                 print("LED ON")
         def btn02(self):
-                GPIO.output(red_pin, True)
+                GPIO.IN(red_pin, False)
                 print("LED OFF")
 
 	#ALARM
