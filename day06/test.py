@@ -76,7 +76,11 @@ class WindowClass(QMainWindow, form_class):
         def increment_log_num(self):
                 global log_num
                 log_num += 1
-
+        
+        def closeEvent(self, event):
+                self.dhtDevice.exit()
+                event.accept()
+                
 class MyClock(QWidget, form_class2):
         def __init__(self):
                 super().__init__()
@@ -132,9 +136,7 @@ class SensorWidget(QWidget, form_class3):
 
                 QtCore.QTimer.singleShot(2000, self.update_sensor_values)
 
-        def closeEvent(self, event):
-                self.dhtDevice.exit()
-                event.accept()
+
 
 if __name__ == "__main__":
         app = QApplication(sys.argv)
