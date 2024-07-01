@@ -25,7 +25,8 @@ form_class = uic.loadUiType("./qt.ui") [0]
 form_class2 = uic.loadUiType("./MyClock.ui") [0]
 form_class3 = uic.loadUiType("./SensorWidget.ui") [0]
 
-led_on = True
+red_pin = True
+blue_pin = True
 
 class WindowClass(QMainWindow, form_class):
         def __init__(self):
@@ -49,17 +50,12 @@ class WindowClass(QMainWindow, form_class):
 
 	#LED
         def btn01(self):
-                global led_on
-                if not led_on:
-                        GPIO.output(red_pin, False)
-                        led_on = False
-                        print("LED ON")
+                GPIO.output(red_pin, False)
+                print("LED ON")
+
         def btn02(self):
-                global led_on
-                if led_on:
-                        GPIO.output(red_pin, False) 
-                        led_on = True
-                        print("LED OFF")
+                GPIO.output(red_pin, False) 
+                print("LED OFF")
 	#ALARM
         def btn05(self):
                 GPIO.output(blue_pin, True)
