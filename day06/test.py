@@ -59,8 +59,7 @@ class WindowClass(QMainWindow, form_class):
                 print("LED OFF")
 	#ALARM
         def btn05(self):
-                self.clock = MyClock()
-                self.clock.show()
+                MyClock.show()
 
         def btn06(self):
                 Buzz.stop()
