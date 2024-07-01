@@ -42,8 +42,8 @@ class WindowClass(QMainWindow, form_class):
 
 
 		#Temperature,Humidity
-		self.Btn_7.clicked.connect(self.btn07)
-		self.Btn_8.clicked.connect(self.btn08)
+                self.Btn_7.clicked.connect(self.btn07)
+                self.Btn_8.clicked.connect(self.btn08)
 
 	#LED
         def btn01(self):
@@ -69,14 +69,14 @@ class WindowClass(QMainWindow, form_class):
                 print("Alarm OFF")
 
 	#Temperature,Humidity
-	def btn07(self):
-		temp = dhtDevice.temperature
-		humid = dhtDevice.humidity
-		print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
-		log_num += 1
+        def btn07(self):
+                temp = dhtDevice.temperature
+                humid = dhtDevice.humidity
+                print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
+                log_num += 1
 
-	def btn08(self):
-		dhtDevice.exit()
+        def btn08(self):
+                dhtDevice.exit()
 
 class MyClock(QWidget, form_class2):
         def __init__(self):
