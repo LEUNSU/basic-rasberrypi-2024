@@ -9,7 +9,7 @@ import board
 red_pin = 21
 blue_pin = 20
 piezoPin = 26
-sensor_pin = 13
+sensor_pin = 22
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(red_pin, GPIO.OUT)
@@ -155,7 +155,7 @@ class SensorWidget(QWidget, form_class3):
               GPIO.setup(sensor_pin, GPIO.IN)
               self.lcdTemp = self.findChild(QLCDNumber, 'lcdTemp')
               self.lcdHumid = self.findChild(QLCDNumber, 'lcdHumid')
-              self.dhtDevice = adafruit_dht.DHT11(board.D13)
+              self.dhtDevice = adafruit_dht.DHT11(board.D22)
               print("156")
               self.update_timer = QtCore.QTimer(self)
               self.update_timer.timeout.connect(self.update_sensor_values)
