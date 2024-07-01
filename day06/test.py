@@ -83,6 +83,7 @@ class WindowClass(QMainWindow, form_class):
                 if self.sensor_widget is not None:
                         self.sensor_widget.close()
                         self.sensor_widget = None
+                        self.update_timer.stop()
                 
                         #GPIO.setup(sensor_pin, GPIO.IN)
                         #GPIO.cleanup()
