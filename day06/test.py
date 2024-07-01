@@ -72,6 +72,7 @@ class WindowClass(QMainWindow, form_class):
         
         def btn07(self):
                 print("pushed")
+                GPIO.setup(sensor_pin, GPIO.IN)
                 self.sensor_widget = SensorWidget()
                 self.sensor_widget.show()
                 self.increment_log_num()
