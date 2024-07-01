@@ -100,6 +100,8 @@ class MyClock(QWidget, form_class2):
                 self.setFixedSize(400, 500)
                 
                 self.CurrLcd = self.findChild(QLCDNumber, 'CurrLcd')
+                self.dial = self.findChild(QDial, 'dial')
+                self.MinLabel = self.findChild(QLabel, 'MinLabel')
 
                 self.dial = QDial(self)
                 self.dial.setMinimum(1)
@@ -120,7 +122,7 @@ class MyClock(QWidget, form_class2):
                 self.CurrLcd.display(QLCDNumber,self.currentTime)
                 if self.CurrLcd is not None: 
                         self.CurrLcd.display(self.currentTime)
-                        
+
                 if current_time.minute() == self.dial.value() and current_time.second() == 0:
                         self.activate_alarm()
 
