@@ -4,7 +4,7 @@ import sys
 import RPi.GPIO as GPIO
 import time
 import adafruit_dht
-import boardimport board
+import board
 
 red_pin = 21
 blue_pin = 20
