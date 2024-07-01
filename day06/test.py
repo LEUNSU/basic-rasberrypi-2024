@@ -69,10 +69,13 @@ class WindowClass(QMainWindow, form_class):
                 print("Alarm OFF")
 
 	#Temperature,Humidity
+        
         def btn07(self):
+                print("pushed")
                 self.sensor_widget = SensorWidget()
                 self.sensor_widget.show()
                 self.increment_log_num()
+
 
         def btn08(self):
                 if self.sensor_widget is not None:
@@ -153,6 +156,7 @@ class SensorWidget(QWidget, form_class3):
         def update_sensor_values(self):
                 try:
                         print("active")
+
                         temp = self.dhtDevice.temperature
                         humid = self.dhtDevice.humidity
                         print("active2")
