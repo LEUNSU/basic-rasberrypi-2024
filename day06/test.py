@@ -166,7 +166,8 @@ class SensorWidget(QWidget, form_class3):
                         print(ex.args[0])
 
         def closeEvent(self, event):
-                GPIO.cleanup()
+                self.update_timer.stop()
+                self.dhtDevice = None
                 event.accept()
 
 if __name__ == "__main__":
