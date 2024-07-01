@@ -69,7 +69,7 @@ class WindowClass(QMainWindow, form_class):
 
 	#Temperature,Humidity
         def btn07(self):
-		global log_num
+                global log_num
                 temp = dhtDevice.temperature
                 humid = dhtDevice.humidity
                 print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
