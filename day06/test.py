@@ -25,6 +25,7 @@ form_class = uic.loadUiType("./qt.ui") [0]
 form_class2 = uic.loadUiType("./MyClock.ui") [0]
 form_class3 = uic.loadUiType("./SensorWidget.ui") [0]
 
+
 class WindowClass(QMainWindow, form_class):
         def __init__(self):
                 super().__init__()
@@ -70,23 +71,6 @@ class WindowClass(QMainWindow, form_class):
 
 	#Temperature,Humidity
         
-        def btn07(self):
-                print("pushed")
-                #GPIO.setup(sensor_pin, GPIO.IN)
-                self.sensor_widget = SensorWidget()
-                self.sensor_widget
-                self.sensor_widget.show()
-                self.increment_log_num()
-
-
-        def btn08(self):
-                if self.sensor_widget is not None:
-                        self.sensor_widget.close()
-                        self.sensor_widget = None
-                        self.update_timer.stop()
-                
-                        #GPIO.setup(sensor_pin, GPIO.IN)
-                        #GPIO.cleanup()
         def show_sensor_widget(self):
                 if self.sensor_widget is None:
                         self.sensor_widget = SensorWidget()
@@ -159,6 +143,24 @@ class SensorWidget(QWidget, form_class3):
               self.update_timer = QtCore.QTimer(self)
               self.update_timer.timeout.connect(self.update_sensor_values)
               self.update_timer.start(2000)
+        
+        def btn07(self):
+                print("pushed")
+                #GPIO.setup(sensor_pin, GPIO.IN)
+                self.sensor_widget = SensorWidget()
+                self.sensor_widget
+                self.sensor_widget.show()
+                self.increment_log_num()
+
+
+        def btn08(self):
+                if self.sensor_widget is not None:
+                        self.sensor_widget.close()
+                        self.sensor_widget = None
+                        self.update_timer.stop()
+                
+                        #GPIO.setup(sensor_pin, GPIO.IN)
+                        #GPIO.cleanup()
               
         def update_sensor_values(self):
                 try:
