@@ -72,9 +72,9 @@ class WindowClass(QMainWindow, form_class):
 	#Temperature,Humidity
         
         def btn07(self):
-                GPIO.setup(sensor_pin, GPIO.IN)
+                #GPIO.setup(sensor_pin, GPIO.IN)
                 self.sensor_widget = SensorWidget()
-                self.sensor_widget.show()
+                #self.sensor_widget.show()
                 self.increment_log_num()
 
 
