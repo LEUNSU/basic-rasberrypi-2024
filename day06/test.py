@@ -75,16 +75,15 @@ class WindowClass(QMainWindow, form_class):
                 print("pushed")
                 #GPIO.setup(sensor_pin, GPIO.IN)
                 self.sensor_widget = SensorWidget()
-                self.sensor_widget
                 self.sensor_widget.show()
                 self.increment_log_num()
 
 
         def btn08(self):
                 if self.sensor_widget is not None:
+                        self.sensor_widget.update_timer.stop()
                         self.sensor_widget.close()
                         self.sensor_widget = None
-                        self.update_timer.stop()
                 
                         #GPIO.setup(sensor_pin, GPIO.IN)
                         #GPIO.cleanup()
