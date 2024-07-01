@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>268</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,7 +51,7 @@
     <string>Humid :</string>
    </property>
   </widget>
-  <widget class="QLCDNumber" name="lcdNumber">
+  <widget class="QLCDNumber" name="lcdTemp">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -61,7 +61,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLCDNumber" name="lcdNumber_2">
+  <widget class="QLCDNumber" name="lcdHumid">
    <property name="geometry">
     <rect>
      <x>140</x>
