@@ -11,6 +11,9 @@ blue_pin = 20
 
 piezoPin = 26
 
+log_num = 0
+sensor_pin = 5
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(red_pin, GPIO.OUT)
 GPIO.setup(blue_pin, GPIO.OUT)
@@ -19,8 +22,6 @@ GPIO.setup(sensor_pin, GPIO.OUT)
 
 Buzz = GPIO.PWM(piezoPin, 440)
 
-log_num = 0
-sensor_pin = 5
 dhtDevice = adafruit_dht.DHT11(board.D5)
 
 
@@ -103,6 +104,8 @@ class MyClock(QWidget, form_class2):
                 current_time = QtCore.QTime.currentTime()
                 self.currentTime = current_time.toString('hh:mm:ss')
                 self.lcd.display(self.currentTime)
+
+#class 
 
 def closeEvent(self, event):
         GPIO.cleanup()
