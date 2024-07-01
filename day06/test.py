@@ -70,8 +70,8 @@ class WindowClass(QMainWindow, form_class):
 	#Temperature,Humidity
         def btn07(self):
                 self.sensor_widget = SensorWidget()
-                self.sensor_widget.show()
-
+                self.sensor_widget.exec_()
+                self.increment_log_num()
         def increment_log_num(self):
                 global log_num
                 log_num += 1
@@ -112,7 +112,7 @@ class MyClock(QWidget, form_class2):
                 event.accept()
 
 
-class SensorWidget(QWidget, form_class3):
+class SensorWidget(QDialog, form_class3):
         def __init__(self):
               super().__init__()
               self.setupUi(self)
@@ -122,10 +122,20 @@ class SensorWidget(QWidget, form_class3):
               self.update_sensor_values()
               
         def update_sensor_values(self):
-                temp = self.dhtDevice.temperature
-                humid = self.dhtDevice.humidity
-                self.lcdTemp.display(temp)
-                self.lcdHumid.display(humid)
+                try:
+                        temp = self.dhtDevice.temperature
+                        humid = self.dhtDevice.humidity
+                        if temp is not None and humid is not None:
+                                self.lcdTemp.display(temp)
+                                self.lcdHumid.display(humid)
+                        else:
+                                self.lcdTemp.display(0)
+                                self.lcdHumid.display(0)
+                except RuntimeError as ex:
+                        print(ex.args[0])
+
+                QtCore.QTimer.singleShot(2000, self.update_sensor_values)
+
 
         def closeEvent(self, event):
                 self.dhtDevice.exit()
