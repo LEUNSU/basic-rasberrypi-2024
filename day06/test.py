@@ -41,6 +41,9 @@ class WindowClass(QMainWindow, form_class):
 
 		#Temperature,Humidity
                 self.Btn_7.clicked.connect(self.btn07)
+                self.Btn_8.clicked.connect(self.btn08)
+
+                self.sensor_widget = None 
 
 	#LED
         def btn01(self):
@@ -75,6 +78,17 @@ class WindowClass(QMainWindow, form_class):
                 global log_num
                 log_num += 1
         
+        def btn08(self):
+                if self.sensor_widget is not None:
+                        self.sensor_widget.close()
+                        self.sensor_widget = None
+                        self.show_sensor_widget()
+
+        def show_sensor_widget(self):
+                if self.sensor_widget is None:
+                        self.sensor_widget = SensorWidget()
+                        self.sensor_widget.show()
+                        self.increment_log_num()
                 
 class MyClock(QWidget, form_class2):
     def __init__(self):
