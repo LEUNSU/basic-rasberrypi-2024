@@ -156,6 +156,7 @@ class SensorWidget(QWidget, form_class3):
                         temp = self.dhtDevice.temperature
                         humid = self.dhtDevice.humidity
                         if temp is not None and humid is not None:
+                                print("active2")
                                 self.lcdTemp.display(temp)
                                 self.lcdHumid.display(humid)
                                 print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
