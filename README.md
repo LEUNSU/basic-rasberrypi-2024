@@ -40,7 +40,7 @@ IoT 개발자 라즈베리파이 학습 리포지토리
     - 접속 방법 : source ./env/bin/activate
     - 종료 방법 : deactivate
 - pip install RPi.GPIO
-- sudo git clone https://github.com/WiringPi/WiringPi
+- sudo git clone https://github.com/WiringPi/WiringPi : gpio readall을 사용하기 위해 설치하는 방법
 - WiringPi > sudo ./build > gpio -v > gpio readall
 
 - 적외선 PIR(인체감지)센서
