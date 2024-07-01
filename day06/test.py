@@ -115,7 +115,9 @@ class SensorWidget(QWidget, form_class3):
               self.lcdTemp = self.findChild(QLCDNumber, 'lcdTemp')
               self.lcdHumid = self.findChild(QLCDNumber, 'lcdHumid')
               self.dhtDevice = adafruit_dht.DHT11(board.D13)
-              self.update_sensor_values()
+              self.update_timer = QtCore.QTimer(self)
+              self.update_timer.timeout.connect(self.update_sensor_values)
+              self.update_timer.start(2000)
               
         def update_sensor_values(self):
                 try:
@@ -124,13 +126,12 @@ class SensorWidget(QWidget, form_class3):
                         if temp is not None and humid is not None:
                                 self.lcdTemp.display(temp)
                                 self.lcdHumid.display(humid)
+                                print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
                         else:
                                 self.lcdTemp.display(0)
                                 self.lcdHumid.display(0)
                 except RuntimeError as ex:
                         print(ex.args[0])
-
-                QtCore.QTimer.singleShot(2000, self.update_sensor_values)
 
         def closeEvent(self, event):
                 GPIO.cleanup()
