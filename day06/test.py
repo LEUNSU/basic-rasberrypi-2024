@@ -101,7 +101,7 @@ class MyClock(QWidget, form_class2):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setFixedSize(250, 100)
+        self.setFixedSize(400, 500)
 
         self.lcd = QLCDNumber(self)
         self.lcd.setGeometry(10, 10, 230, 50)
