@@ -172,10 +172,10 @@ class SensorWidget(QWidget, form_class3):
                 except RuntimeError as ex:
                         print(ex.args[0])
 
-        # def closeEvent(self, event):
-        #         self.update_timer.stop()
-        #         self.dhtDevice.exit()
-        #         event.accept()
+        def closeEvent(self, event):
+                self.update_timer.stop()
+                self.dhtDevice.exit()
+                event.accept()
 
 if __name__ == "__main__":
         app = QApplication(sys.argv)
