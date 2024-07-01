@@ -25,6 +25,7 @@ log_num = 0
 
 form_class = uic.loadUiType("./qt.ui") [0]
 form_class2 = uic.loadUiType("./MyClock.ui") [0]
+form_class3 = uic.loadUiType("./SensorWidget.ui") [0]
 
 class WindowClass(QMainWindow, form_class):
         def __init__(self):
@@ -106,14 +107,40 @@ class MyClock(QWidget, form_class2):
                 self.currentTime = current_time.toString('hh:mm:ss')
                 self.lcd.display(self.currentTime)
 
-	def closeEvent(self, event):
-        	GPIO.cleanup()
-        	event.accept()
+        def closeEvent(self, event):
+                GPIO.cleanup()
+                event.accept()
 
 
-class SensorWidget(QWidget):
+class SensorWidget(QWidget, form_class3):
 	def __init__(self):
-		super().
+              super().__init__()
+              self.setupUi(self)
+              self.lcdTemp = QLCDNumber("Temperature: - °C")
+              self.lcdHumid = QLCDNumber("Humidity: - %")
+              self.dhtDevice = adafruit_dht.DHT11(board.D17)
+              self.update_sensor_values()
+
+        def update_sensor_values(self):
+                try:
+                        temp = self.dhtDevice.temperature
+                        humid = self.dhtDevice.humidity
+                        if temp is not None and humid is not None:
+                                self.lcdTemp.setText(f"Temperature: {temp} °C")
+                                self.lcdHumid.setText(f"Humidity: {humid} %")
+                        else:
+                                self.label_temp.setText("Failed to read temperature")
+                                self.label_humid.setText("Failed to read humidity")
+                except RuntimeError as ex:
+                        self.label_temp.setText("Error reading temperature")
+                        self.label_humid.setText("Error reading humidity")
+
+                # Schedule next update
+                QtCore.QTimer.singleShot(2000, self.update_sensor_values)
+
+        def closeEvent(self, event):
+                self.dhtDevice.exit()
+                event.accept()
 
 if __name__ == "__main__":
         app = QApplication(sys.argv)
