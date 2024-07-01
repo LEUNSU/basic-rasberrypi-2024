@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>763</height>
+    <height>435</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>0</x>
       <y>10</y>
       <width>791</width>
-      <height>701</height>
+      <height>371</height>
      </rect>
     </property>
     <property name="font">
@@ -129,100 +129,10 @@
       </property>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>60</y>
-       <width>250</width>
-       <height>291</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(244, 244, 244);</string>
-     </property>
-     <property name="title">
-      <string/>
-     </property>
-     <widget class="QPushButton" name="Btn_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>240</y>
-        <width>99</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>ON</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Btn_4">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>240</y>
-        <width>99</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>OFF</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>20</y>
-        <width>91</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>20</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="lineWidth">
-       <number>1</number>
-      </property>
-      <property name="text">
-       <string>Camera</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="wordWrap">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>80</y>
-        <width>131</width>
-        <height>131</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap>images/002.png</pixmap>
-      </property>
-      <property name="scaledContents">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </widget>
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">
       <rect>
-       <x>530</x>
+       <x>270</x>
        <y>60</y>
        <width>251</width>
        <height>291</height>
@@ -312,10 +222,10 @@
     <widget class="QGroupBox" name="groupBox_5">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>370</y>
+       <x>530</x>
+       <y>60</y>
        <width>251</width>
-       <height>311</height>
+       <height>291</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -357,7 +267,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
+        <y>10</y>
         <width>231</width>
         <height>51</height>
        </rect>
