@@ -69,17 +69,8 @@ class WindowClass(QMainWindow, form_class):
 
 	#Temperature,Humidity
         def btn07(self):
-                global log_num
-                try:
-                        temp = dhtDevice.temperature
-                        humid = dhtDevice.humidity
-                        if temp is not None and humid is not None:
-                                print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
-                                log_num += 1
-                        else:
-                                print("Failed to read from DHT sensor")
-                except RuntimeError as ex:
-                        print(ex.args[0])
+                self.sensor_widget = SensorWidget()
+                self.sensor_widget.show()
 
 class MyClock(QWidget, form_class2):
         def __init__(self):
@@ -116,8 +107,8 @@ class SensorWidget(QWidget, form_class3):
 	def __init__(self):
               super().__init__()
               self.setupUi(self)
-              self.lcdTemp = QLCDNumber("Temperature: - °C")
-              self.lcdHumid = QLCDNumber("Humidity: - %")
+              self.lcdTemp = self.findChild(QLCDNumber, 'lcdTemp')
+              self.lcdHumid = self.findChild(QLCDNumber, 'lcdHumid')
               self.dhtDevice = adafruit_dht.DHT11(board.D17)
               self.update_sensor_values()
         
@@ -126,14 +117,13 @@ class SensorWidget(QWidget, form_class3):
                         temp = self.dhtDevice.temperature
                         humid = self.dhtDevice.humidity
                         if temp is not None and humid is not None:
-                                self.lcdTemp.setText(f"Temperature: {temp} °C")
-                                self.lcdHumid.setText(f"Humidity: {humid} %")
+                                self.lcdTemp.display(temp)
+                                self.lcdHumid.display(humid)
                         else:
-                                self.label_temp.setText("Failed to read temperature")
-                                self.label_humid.setText("Failed to read humidity")
+                                self.lcdTemp.display(0)
+                                self.lcdHumid.display(0)
                 except RuntimeError as ex:
-                        self.label_temp.setText("Error reading temperature")
-                        self.label_humid.setText("Error reading humidity")
+                        print(ex.args[0])
 
                 # Schedule next update
                 QtCore.QTimer.singleShot(2000, self.update_sensor_values)
