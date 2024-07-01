@@ -70,7 +70,16 @@ class WindowClass(QMainWindow, form_class):
 	#Temperature,Humidity
         def btn07(self):
                 self.sensor_widget = SensorWidget()
-                self.sensor_widget.show()
+                self.sensor_widget.exec_()
+
+        def increment_log_num(self):
+                global log_num
+                log_num += 1
+
+        def closeEvent(self, event):
+                GPIO.cleanup()
+                event.accept()
+
 
 class MyClock(QWidget, form_class2):
         def __init__(self):
