@@ -8,10 +8,7 @@ import board
 
 red_pin = 21
 blue_pin = 20
-
 piezoPin = 26
-
-log_num = 0
 sensor_pin = 5
 
 GPIO.setmode(GPIO.BCM)
@@ -24,6 +21,7 @@ Buzz = GPIO.PWM(piezoPin, 440)
 
 dhtDevice = adafruit_dht.DHT11(board.D5)
 
+log_num = 0
 
 form_class = uic.loadUiType("./qt.ui") [0]
 form_class2 = uic.loadUiType("./MyClock.ui") [0]
@@ -71,13 +69,14 @@ class WindowClass(QMainWindow, form_class):
 
 	#Temperature,Humidity
         def btn07(self):
+		global log_num
                 temp = dhtDevice.temperature
                 humid = dhtDevice.humidity
                 print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
                 log_num += 1
 
-        def btn08(self):
-                dhtDevice.exit()
+#        def btn08(self):
+#                dhtDevice.exit()
 
 class MyClock(QWidget, form_class2):
         def __init__(self):
