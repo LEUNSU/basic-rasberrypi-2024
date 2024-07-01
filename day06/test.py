@@ -115,7 +115,7 @@ class MyClock(QWidget, form_class2):
 
         def show_time(self):
                 current_time = QtCore.QTime.currentTime()
-                self.currentTime = current_time.toString('hh:mm:ss')
+                self.currentTime = current_time.toString('HH:mm:ss')
 
                 if self.CurrLcd is not None: 
                         self.CurrLcd.display(self.currentTime)
