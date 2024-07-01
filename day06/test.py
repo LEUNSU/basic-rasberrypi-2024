@@ -69,13 +69,13 @@ class WindowClass(QMainWindow, form_class):
 	#Temperature,Humidity
         def btn07(self):
                 global log_num
-		try:
-                	temp = dhtDevice.temperature
-                	humid = dhtDevice.humidity
-                	print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
-                	log_num += 1
-		except RuntimeError as ex:
-			print(ex.args[0])
+                try:
+                        temp = dhtDevice.temperature
+                        humid = dhtDevice.humidity
+                        print(f'{log_num} - Temp : {temp}C / Humid : {humid}%')
+                        log_num += 1
+                except RuntimeError as ex:
+                        print(ex.args[0])
 
 class MyClock(QWidget, form_class2):
         def __init__(self):
