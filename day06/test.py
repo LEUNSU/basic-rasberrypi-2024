@@ -103,7 +103,6 @@ class MyClock(QWidget, form_class2):
                 self.dial = self.findChild(QDial, 'dial')
                 self.MinLabel = self.findChild(QLabel, 'MinLabel')
 
-                self.dial = QDial(self)
                 self.dial.setMinimum(1)
                 self.dial.setMaximum(60)
 
