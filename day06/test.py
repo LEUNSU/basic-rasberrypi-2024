@@ -64,8 +64,7 @@ class WindowClass(QMainWindow, form_class):
                 self.clock_widget.show()
 
         def btn06(self):
-                if self.clock_widget is not None:
-                        self.clock_widget.close()  # MyClock 위젯만 닫기
+                self.clock_widget.close()
                 Buzz.stop()
                 GPIO.output(blue_pin, False)
                 print("Alarm OFF")
