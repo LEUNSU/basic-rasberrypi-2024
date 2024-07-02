@@ -47,7 +47,8 @@ class WindowClass(QMainWindow, form_class):
                 self.Btn_7.clicked.connect(self.btn07)
                 self.Btn_8.clicked.connect(self.btn08)
 
-                self.sensor_widget = None 
+                self.sensor_widget = None
+                self.clock_widget = None 
 
 
 	#LED
