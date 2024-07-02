@@ -142,7 +142,6 @@ class MyClock(QWidget, form_class2):
                 alarm_time_str = alarm_time.toString('HH:mm:ss')
 
                 if current_time_str == alarm_time_str:
-                        GPIO.output(blue_pin, False)
                         GPIO.output(blue_pin, True)
                         Buzz.start(50)
                         print("Alarm ON")
