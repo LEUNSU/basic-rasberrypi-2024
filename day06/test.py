@@ -73,7 +73,7 @@ class WindowClass(QMainWindow, form_class):
                         QtCore.QTimer.singleShot(2000, self.turn_off_light)
                         self.clock_widget.close()
                         self.clock_widget = None
-                        GPIO.cleanup(sensor_pin)
+                        GPIO.cleanup(piezoPin)
 
         def turn_off_light(self):
                 GPIO.output(blue_pin, True)
