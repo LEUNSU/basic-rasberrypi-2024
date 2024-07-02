@@ -97,14 +97,6 @@ class WindowClass(QMainWindow, form_class):
         def increment_log_num(self):
                 global log_num
                 log_num += 1
-        
-        # 메인 윈도우가 닫힐 때, 열려 있는 모든 위젯 창 닫기
-        def closeEvent(self, event):
-                if self.sensor_widget is not None:
-                        self.sensor_widget.close()
-                if self.clock_widget is not None:
-                        self.clock_widget.close()
-                event.accept()
                 
 class MyClock(QWidget, form_class2):
         def __init__(self):
