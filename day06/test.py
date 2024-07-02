@@ -64,7 +64,7 @@ class WindowClass(QMainWindow, form_class):
                 self.clock_widget.show()
 
         def btn06(self):
-                if hasattr(self, 'clock_widget') and self.clock_widget is not None:
+                if self.clock_widget is not None:
                         self.clock_widget.close()  # MyClock 위젯만 닫기
                 Buzz.stop()
                 GPIO.output(blue_pin, False)
@@ -98,12 +98,11 @@ class WindowClass(QMainWindow, form_class):
                 global log_num
                 log_num += 1
         
-
         # 메인 윈도우가 닫힐 때, 열려 있는 모든 위젯 창 닫기
         def closeEvent(self, event):
-                if hasattr(self, 'sensor_widget') and self.sensor_widget is not None:
+                if self.sensor_widget is not None:
                         self.sensor_widget.close()
-                if hasattr(self, 'clock_widget') and self.clock_widget is not None:
+                if self.clock_widget is not None:
                         self.clock_widget.close()
                 event.accept()
                 
