@@ -64,12 +64,12 @@ class WindowClass(QMainWindow, form_class):
                 self.clock_widget.show()
 
         def btn06(self):
-                if self.clock_widget is not None:
+                if hasattr(self, 'clock_widget') and self.clock_widget is not None:
                         self.clock_widget.close()
-                        Buzz.stop()
-                        GPIO.output(blue_pin, False)
-                        print("Alarm OFF")
-                        QtCore.QTimer.singleShot(2000, self.turn_off_light)
+                Buzz.stop()
+                GPIO.output(blue_pin, False)
+                print("Alarm OFF")
+                QtCore.QTimer.singleShot(2000, self.turn_off_light)
 
         def turn_off_light(self):
                 GPIO.output(blue_pin, True)
