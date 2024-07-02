@@ -63,6 +63,7 @@ class WindowClass(QMainWindow, form_class):
         def btn05(self):
                 self.clock_widget = MyClock()
                 self.clock_widget.show()
+                GPIO.setup(sensor_pin, GPIO.IN)
 
         def btn06(self):
                 if self.clock_widget is not None:
