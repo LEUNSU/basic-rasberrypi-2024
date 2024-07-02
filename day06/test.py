@@ -76,8 +76,8 @@ class WindowClass(QMainWindow, form_class):
 
         def turn_off_light(self):
                 GPIO.setmode(GPIO.BCM)
-                GPIO.setup(blue_pin, GPIO.OUT)
-                GPIO.output(blue_pin, False)
+                GPIO.setup(blue_pin, GPIO.IN)
+                #GPIO.output(blue_pin, False)
 
 
 	#Temperature,Humidity
