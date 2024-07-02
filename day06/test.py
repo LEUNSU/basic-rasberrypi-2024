@@ -64,6 +64,8 @@ class WindowClass(QMainWindow, form_class):
                 self.clock_widget.show()
 
         def btn06(self):
+                if self.clock_widget:
+                        self.clock_widget.close()  # MyClock 위젯만 닫기
                 self.clock_widget.close()
                 Buzz.stop()
                 GPIO.output(blue_pin, False)
@@ -96,7 +98,15 @@ class WindowClass(QMainWindow, form_class):
         def increment_log_num(self):
                 global log_num
                 log_num += 1
-                
+
+            # 메인 윈도우가 닫힐 때, 열려 있는 모든 위젯 창 닫기
+        def closeEvent(self, event):
+                if self.sensor_widget:
+                        self.sensor_widget.close()
+                if self.clock_widget:
+                        self.clock_widget.close()
+                event.accept()
+
 class MyClock(QWidget, form_class2):
         def __init__(self):
                 super().__init__()
@@ -154,8 +164,8 @@ class MyClock(QWidget, form_class2):
                 Buzz.stop()
                 GPIO.output(blue_pin, False)
                 GPIO.cleanup()
-                event.accept()
                 print("Alarm OFF")
+                event.accept()  # 이벤트 수락
 
 class SensorWidget(QWidget, form_class3):
         def __init__(self):
@@ -188,7 +198,7 @@ class SensorWidget(QWidget, form_class3):
         def closeEvent(self, event):
                 self.update_timer.stop()
                 self.dhtDevice.exit()
-                event.accept()
+                event.accept()  # 이벤트 수락
 
 if __name__ == "__main__":
         app = QApplication(sys.argv)
