@@ -60,14 +60,14 @@ class WindowClass(QMainWindow, form_class):
                 print("LED OFF")
 	#ALARM
         def btn05(self):
-                self.clock = MyClock()
-                self.clock.show()
+                self.clock_widget = MyClock()
+                self.clock_widget.show()
 
         def btn06(self):
                 Buzz.stop()
                 GPIO.output(blue_pin, False)
                 print("Alarm OFF")
-                QtCore.QTimer.singleShot(5000, self.turn_off_light)
+                QtCore.QTimer.singleShot(2000, self.turn_off_light)
 
         def turn_off_light(self):
                 GPIO.output(blue_pin, True)
@@ -96,6 +96,14 @@ class WindowClass(QMainWindow, form_class):
                 global log_num
                 log_num += 1
         
+
+        # 메인 윈도우가 닫힐 때, 열려 있는 모든 위젯 창 닫기
+        def closeEvent(self, event): 
+                if self.sensor_widget is not None:
+                        self.sensor_widget.close()
+                if self.clock_widget is not None:
+                        self.clock_widget.close()
+                event.accept()
                 
 class MyClock(QWidget, form_class2):
         def __init__(self):
