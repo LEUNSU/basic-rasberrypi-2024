@@ -53,12 +53,10 @@ class WindowClass(QMainWindow, form_class):
 	#LED
         def btn01(self):
                 GPIO.output(red_pin, False)
-                GPIO.output(blue_pin, GPIO.input(blue_pin))  # blue_pin의 현재 상태 유지
                 print("LED ON")
 
         def btn02(self):
                 GPIO.output(red_pin, True) 
-                GPIO.output(blue_pin, GPIO.input(blue_pin))  # blue_pin의 현재 상태 유지
                 print("LED OFF")
 	#ALARM
         def btn05(self):
@@ -68,7 +66,6 @@ class WindowClass(QMainWindow, form_class):
         def btn06(self):
                 Buzz.stop()
                 GPIO.output(blue_pin, False)
-                GPIO.output(red_pin, GPIO.input(red_pin))  # red_pin의 현재 상태 유지
                 print("Alarm OFF")
 
 	#Temperature,Humidity
@@ -145,6 +142,7 @@ class MyClock(QWidget, form_class2):
                 alarm_time_str = alarm_time.toString('HH:mm:ss')
 
                 if current_time_str == alarm_time_str:
+                        GPIO.output(blue_pin, False)
                         GPIO.output(blue_pin, True)
                         Buzz.start(50)
                         print("Alarm ON")
