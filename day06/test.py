@@ -53,10 +53,12 @@ class WindowClass(QMainWindow, form_class):
 	#LED
         def btn01(self):
                 GPIO.output(red_pin, False)
+                GPIO.output(blue_pin, GPIO.input(blue_pin))  # blue_pin의 현재 상태 유지
                 print("LED ON")
 
         def btn02(self):
                 GPIO.output(red_pin, True) 
+                GPIO.output(blue_pin, GPIO.input(blue_pin))  # blue_pin의 현재 상태 유지
                 print("LED OFF")
 	#ALARM
         def btn05(self):
@@ -66,6 +68,7 @@ class WindowClass(QMainWindow, form_class):
         def btn06(self):
                 Buzz.stop()
                 GPIO.output(blue_pin, False)
+                GPIO.output(red_pin, GPIO.input(red_pin))  # red_pin의 현재 상태 유지
                 print("Alarm OFF")
 
 	#Temperature,Humidity
