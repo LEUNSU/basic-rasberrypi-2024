@@ -66,18 +66,14 @@ class WindowClass(QMainWindow, form_class):
                 GPIO.setup(sensor_pin, GPIO.IN)
 
         def btn06(self):
-                if self.clock_widget is not None:
-                        Buzz.stop()
-                        GPIO.output(blue_pin, False)
-                        print("Alarm OFF")
-                        QtCore.QTimer.singleShot(2000, self.turn_off_light)
-                        self.clock_widget.close()
-                        self.clock_widget = None
+                Buzz.stop()
+                GPIO.output(blue_pin, False)
+                print("Alarm OFF")
+                QtCore.QTimer.singleShot(2000, self.turn_off_light)
+
 
         def turn_off_light(self):
-                GPIO.setmode(GPIO.BCM)
-                GPIO.setup(blue_pin, GPIO.IN)
-                #GPIO.output(blue_pin, False)
+                GPIO.output(blue_pin, True)
 
 
 	#Temperature,Humidity
