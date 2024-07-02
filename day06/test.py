@@ -73,7 +73,7 @@ class WindowClass(QMainWindow, form_class):
                         QtCore.QTimer.singleShot(2000, self.turn_off_light)
                         self.clock_widget.close()
                         self.clock_widget = None
-                        GPIO.cleanup(piezoPin)
+                        GPIO.cleanup()
 
         def turn_off_light(self):
                 GPIO.output(blue_pin, True)
@@ -123,6 +123,8 @@ class MyClock(QWidget, form_class2):
 
                 self.dial.valueChanged.connect(self.update_label)
                 self.timeEdit.timeChanged.connect(self.update_timeedit)
+
+                GPIO.setup(sensor_pin, GPIO.IN)  # GPIO 설정
 
         def show_time(self):
                 current_time = QtCore.QTime.currentTime()
