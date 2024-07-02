@@ -65,6 +65,7 @@ class WindowClass(QMainWindow, form_class):
 
         def btn06(self):
                 Buzz.stop()
+                self.clock_widget.close()
                 GPIO.output(blue_pin, False)
                 print("Alarm OFF")
                 QtCore.QTimer.singleShot(2000, self.turn_off_light)
