@@ -122,7 +122,6 @@ class MyClock(QWidget, form_class2):
                 self.dial.valueChanged.connect(self.update_label)
                 self.timeEdit.timeChanged.connect(self.update_timeedit)
 
-                GPIO.setup(sensor_pin, GPIO.IN)  # GPIO 설정
 
         def show_time(self):
                 current_time = QtCore.QTime.currentTime()
