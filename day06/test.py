@@ -33,8 +33,8 @@ class WindowClass(QMainWindow, form_class):
         self.setupUi(self)
 
         # 초기 상태 설정
-        GPIO.output(red_pin, True) 
-        GPIO.output(blue_pin, True)  
+        GPIO.output(red_pin, False) 
+        GPIO.output(blue_pin, False)  
 
         # LED
         self.Btn_1.clicked.connect(self.btn01)
