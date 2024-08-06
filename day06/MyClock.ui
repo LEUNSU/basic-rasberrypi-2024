@@ -65,7 +65,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>70</x>
      <y>280</y>
      <width>68</width>
      <height>22</height>
@@ -103,7 +103,7 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>80</x>
      <y>370</y>
      <width>101</width>
      <height>22</height>
@@ -123,8 +123,8 @@
   <widget class="QTimeEdit" name="timeEdit">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>370</y>
+     <x>190</x>
+     <y>360</y>
      <width>121</width>
      <height>32</height>
     </rect>
