@@ -33,8 +33,7 @@ class WindowClass(QMainWindow, form_class):
         self.setupUi(self)
 
         # 초기 상태 설정
-        GPIO.output(red_pin, True) 
-        GPIO.output(blue_pin, True)  
+        self.set_initial_led_state()
 
         # LED
         self.Btn_1.clicked.connect(self.btn01)
@@ -51,6 +50,10 @@ class WindowClass(QMainWindow, form_class):
 
         self.sensor_widget = None
         self.clock_widget = None 
+
+    def set_initial_led_state(self):
+        GPIO.output(red_pin, True)  # 빨간 LED 켜짐
+        GPIO.output(blue_pin, True)  # 파란 LED 켜짐
 
     # LED
     def btn01(self):
@@ -74,13 +77,14 @@ class WindowClass(QMainWindow, form_class):
 
     def btn06(self):
         Buzz.stop()
-        GPIO.output(blue_pin, False)
+        GPIO.output(blue_pin, False)  # 파란 불 끄기
         print("Alarm OFF")
-        QtCore.QTimer.singleShot(2000, self.turn_off_light)
+        QtCore.QTimer.singleShot(2000, self.reset_led_state)  # 2초 후 LED 상태 복구
 
-    def turn_off_light(self):
-        GPIO.output(blue_pin, True)
-
+    def reset_led_state(self):
+        # 초기 상태로 LED 복구
+        self.set_initial_led_state()
+        
     # Temperature, Humidity
     def btn07(self):
         self.sensor_widget = SensorWidget()
