@@ -19,7 +19,7 @@ GPIO.setup(sensor_pin, GPIO.IN)
 
 Buzz = GPIO.PWM(piezoPin, 440)
 red_pwm = GPIO.PWM(red_pin, 1000)  # PWM 생성, 주파수 1kHz
-red_pwm.start(100)  # 초기 듀티사이클 100 (LED 꺼짐)
+red_pwm.start(0)  # 초기 듀티사이클 0
 
 log_num = 0
 
@@ -33,14 +33,13 @@ class WindowClass(QMainWindow, form_class):
         self.setupUi(self)
 
         # 초기 상태 설정
-        GPIO.output(red_pin, False) 
-        GPIO.output(blue_pin, False)  
+        GPIO.output(red_pin, True) 
+        GPIO.output(blue_pin, True)  
 
         # LED
         self.Btn_1.clicked.connect(self.btn01)
         self.Btn_2.clicked.connect(self.btn02)
         self.horizontalSlider.valueChanged.connect(self.change_brightness)  # QSlider 신호 연결
-        self.horizontalSlider.setValue(0)  # 초기 슬라이더 값을 0으로 설정
 
         # ALARM
         self.Btn_5.clicked.connect(self.btn05)
