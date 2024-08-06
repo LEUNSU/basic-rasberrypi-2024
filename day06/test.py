@@ -32,9 +32,9 @@ class WindowClass(QMainWindow, form_class):
         super().__init__()
         self.setupUi(self)
 
-        # 초기 상태 설정: 모든 LED 끄기
-        GPIO.output(red_pin, True)  # True가 LED를 끄는 상태라면 유지
-        GPIO.output(blue_pin, True)
+        # 초기 상태 설정
+        GPIO.output(red_pin, True) 
+        GPIO.output(blue_pin, True)  
 
         # LED
         self.Btn_1.clicked.connect(self.btn01)
@@ -54,16 +54,17 @@ class WindowClass(QMainWindow, form_class):
 
     # LED
     def btn01(self):
-        red_pwm.ChangeDutyCycle(100)  # 최대 밝기 (LED 켜짐)
+        red_pwm.ChangeDutyCycle(0)  # 최대 밝기
         print("LED ON")
 
     def btn02(self):
-        red_pwm.ChangeDutyCycle(0)  # 최소 밝기 (LED 꺼짐)
+        red_pwm.ChangeDutyCycle(100)  # 최소 밝기 (LED 꺼짐)
         print("LED OFF")
 
     def change_brightness(self, value):
-        red_pwm.ChangeDutyCycle(value)
-        print(f"Brightness: {value}")
+        reversed_value = 100 - value  # 값 반전
+        red_pwm.ChangeDutyCycle(reversed_value)
+        print(f"Brightness: {value} (Reversed: {reversed_value})")
 
     # ALARM
     def btn05(self):
