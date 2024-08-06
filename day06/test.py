@@ -33,7 +33,7 @@ class WindowClass(QMainWindow, form_class):
                 self.setupUi(self)
 
                 # 초기 상태 설정
-                GPIO.output(red_pin, True) 
+                GPIO.output(red_pin, False)  # 초기에는 LED를 끔
                 GPIO.output(blue_pin, True)  
 
                 # LED
@@ -54,15 +54,19 @@ class WindowClass(QMainWindow, form_class):
 
         # LED
         def btn01(self):
-                red_pwm.ChangeDutyCycle(100)  # 최대 밝기
+                current_brightness = self.horizontalSlider.value()
+                red_pwm.ChangeDutyCycle(current_brightness)  # 슬라이더 값에 맞춰 LED 밝기 설정
+                GPIO.output(red_pin, True)  # LED 켜기
                 print("LED ON")
 
         def btn02(self):
-                red_pwm.ChangeDutyCycle(0)  # 최소 밝기 (LED 꺼짐)
+                red_pwm.ChangeDutyCycle(0)  # LED 밝기 0으로 설정
+                GPIO.output(red_pin, False)  # LED 끄기
                 print("LED OFF")
 
         def change_brightness(self, value):
-                red_pwm.ChangeDutyCycle(value)
+                if GPIO.input(red_pin):  # LED가 켜져 있을 때만 밝기 조절
+                        red_pwm.ChangeDutyCycle(value)
                 print(f"Brightness: {value}")
 
         # ALARM
