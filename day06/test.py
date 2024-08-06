@@ -6,23 +6,28 @@ import time
 import adafruit_dht
 import board
 
+# GPIO Pin Definitions
 red_pin = 21
 blue_pin = 20
 piezoPin = 26
 sensor_pin = 22
 
+# Setup GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(red_pin, GPIO.OUT)
 GPIO.setup(blue_pin, GPIO.OUT)
 GPIO.setup(piezoPin, GPIO.OUT)
 GPIO.setup(sensor_pin, GPIO.IN)
 
+# PWM Initialization
 Buzz = GPIO.PWM(piezoPin, 440)
-red_pwm = GPIO.PWM(red_pin, 1000)  # PWM 생성, 주파수 1kHz
-red_pwm.start(0)  # 초기 듀티사이클 0
+red_pwm = GPIO.PWM(red_pin, 1000)  # PWM for red LED
+red_pwm.start(0)  # Initial duty cycle
 
+# Global Log Number
 log_num = 0
 
+# Load UI Files
 form_class = uic.loadUiType("./qt.ui")[0]
 form_class2 = uic.loadUiType("./MyClock.ui")[0]
 form_class3 = uic.loadUiType("./SensorWidget.ui")[0]
@@ -32,76 +37,72 @@ class WindowClass(QMainWindow, form_class):
         super().__init__()
         self.setupUi(self)
 
-        # 초기 상태 설정
+        # Initial LED State
         self.set_initial_led_state()
 
-        # LED
-        self.Btn_1.clicked.connect(self.btn01)
-        self.Btn_2.clicked.connect(self.btn02)
-        self.horizontalSlider.valueChanged.connect(self.change_brightness)  # QSlider 신호 연결
+        # LED Control
+        self.Btn_1.clicked.connect(self.turn_on_red_led)
+        self.Btn_2.clicked.connect(self.turn_off_red_led)
+        self.horizontalSlider.valueChanged.connect(self.change_red_led_brightness)
 
-        # ALARM
-        self.Btn_5.clicked.connect(self.btn05)
-        self.Btn_6.clicked.connect(self.btn06)
+        # Alarm Control
+        self.Btn_5.clicked.connect(self.show_clock_widget)
+        self.Btn_6.clicked.connect(self.turn_off_alarm)
 
-        # Temperature, Humidity
-        self.Btn_7.clicked.connect(self.btn07)
-        self.Btn_8.clicked.connect(self.btn08)
+        # Temperature and Humidity Control
+        self.Btn_7.clicked.connect(self.show_sensor_widget)
+        self.Btn_8.clicked.connect(self.close_sensor_widget)
 
         self.sensor_widget = None
         self.clock_widget = None 
 
     def set_initial_led_state(self):
-        GPIO.output(red_pin, True)  # 빨간 LED 켜짐
-        GPIO.output(blue_pin, True)  # 파란 LED 켜짐
+        GPIO.output(red_pin, False)  # Red LED off initially
+        GPIO.output(blue_pin, False)  # Blue LED off initially
 
-    # LED
-    def btn01(self):
-        red_pwm.ChangeDutyCycle(0)  # 최대 밝기
-        print("LED ON")
+    # LED Control
+    def turn_on_red_led(self):
+        red_pwm.ChangeDutyCycle(100)  # Maximum brightness
+        print("Red LED ON")
 
-    def btn02(self):
-        red_pwm.ChangeDutyCycle(100)  # 최소 밝기 (LED 꺼짐)
-        print("LED OFF")
+    def turn_off_red_led(self):
+        red_pwm.ChangeDutyCycle(0)  # LED off
+        print("Red LED OFF")
 
-    def change_brightness(self, value):
-        reversed_value = 100 - value  # 값 반전
+    def change_red_led_brightness(self, value):
+        reversed_value = 100 - value  # Reverse the slider value
         red_pwm.ChangeDutyCycle(reversed_value)
-        print(f"Brightness: {value} (Reversed: {reversed_value})")
+        print(f"Red LED Brightness: {value} (Reversed: {reversed_value})")
 
-    # ALARM
-    def btn05(self):
-        self.clock_widget = MyClock()
-        self.clock_widget.show()
+    # Alarm Control
+    def show_clock_widget(self):
+        if self.clock_widget is None:
+            self.clock_widget = MyClock()
+            self.clock_widget.show()
         GPIO.setup(sensor_pin, GPIO.IN)
 
-    def btn06(self):
+    def turn_off_alarm(self):
         Buzz.stop()
-        GPIO.output(blue_pin, False)  # 파란 불 끄기
+        GPIO.output(blue_pin, False)  # Turn off blue LED
         print("Alarm OFF")
-        QtCore.QTimer.singleShot(2000, self.reset_led_state)  # 2초 후 LED 상태 복구
+        QtCore.QTimer.singleShot(2000, self.reset_led_state)  # Restore LED state after 2 seconds
 
     def reset_led_state(self):
-        # 초기 상태로 LED 복구
         self.set_initial_led_state()
-        
-    # Temperature, Humidity
-    def btn07(self):
-        self.sensor_widget = SensorWidget()
-        self.sensor_widget.show()
-        self.increment_log_num()
 
-    def btn08(self):
+    # Temperature and Humidity Control
+    def show_sensor_widget(self):
+        if self.sensor_widget is None:
+            self.sensor_widget = SensorWidget()
+            self.sensor_widget.show()
+            self.increment_log_num()
+
+    def close_sensor_widget(self):
         if self.sensor_widget is not None:
             self.sensor_widget.update_timer.stop()
             self.sensor_widget.close()
             self.sensor_widget = None
             GPIO.cleanup(sensor_pin)
-
-    def show_sensor_widget(self):
-        if self.sensor_widget is None:
-            self.sensor_widget = SensorWidget()
-            self.sensor_widget.show()
 
     def increment_log_num(self):
         global log_num
@@ -129,7 +130,6 @@ class MyClock(QWidget, form_class2):
         self.dial.valueChanged.connect(self.update_label)
         self.timeEdit.timeChanged.connect(self.update_timeedit)
 
-
     def show_time(self):
         current_time = QtCore.QTime.currentTime()
         self.currentTime = current_time.toString('HH:mm:ss')
@@ -137,7 +137,7 @@ class MyClock(QWidget, form_class2):
         if self.CurrLcd is not None: 
             self.CurrLcd.display(self.currentTime)
             
-        self.activate_alarm()
+        self.check_alarm()
 
     def update_label(self, value):
         self.MinLabel.setText(f"{value}")
@@ -149,21 +149,18 @@ class MyClock(QWidget, form_class2):
         alarm_time = current_time.addSecs(dial_value * 60)
         self.timeEdit.setTime(alarm_time)
 
-    def activate_alarm(self):
+    def check_alarm(self):
         current_time = QtCore.QTime.currentTime()
         alarm_time = self.timeEdit.time()
         
-        current_time_str = current_time.toString('HH:mm:ss')
-        alarm_time_str = alarm_time.toString('HH:mm:ss')
-
-        if current_time_str == alarm_time_str:
-            GPIO.output(blue_pin, True)
-            Buzz.start(50)
+        if current_time.toString('HH:mm:ss') == alarm_time.toString('HH:mm:ss'):
+            GPIO.output(blue_pin, True)  # Turn on blue LED
+            Buzz.start(50)  # Start buzzer
             print("Alarm ON")
 
     def closeEvent(self, event):
         Buzz.stop()
-        GPIO.output(blue_pin, False)
+        GPIO.output(blue_pin, False)  # Ensure blue LED is turned off
         GPIO.cleanup()
         event.accept()
         print("Alarm OFF")
