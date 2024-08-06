@@ -18,6 +18,8 @@ GPIO.setup(piezoPin, GPIO.OUT)
 GPIO.setup(sensor_pin, GPIO.IN)
 
 Buzz = GPIO.PWM(piezoPin, 440)
+red_pwm = GPIO.PWM(red_pin, 1000)  # PWM 생성, 주파수 1kHz
+red_pwm.start(0)  # 초기 듀티사이클 0
 
 log_num = 0
 
@@ -34,32 +36,36 @@ class WindowClass(QMainWindow, form_class):
                 GPIO.output(red_pin, True) 
                 GPIO.output(blue_pin, True)  
 
-		#LED
+                # LED
                 self.Btn_1.clicked.connect(self.btn01)
                 self.Btn_2.clicked.connect(self.btn02)
+                self.horizontalSlider.valueChanged.connect(self.change_brightness)  # QSlider 신호 연결
 
-		#ALARM
+                # ALARM
                 self.Btn_5.clicked.connect(self.btn05)
                 self.Btn_6.clicked.connect(self.btn06)
 
-
-		#Temperature,Humidity
+                # Temperature, Humidity
                 self.Btn_7.clicked.connect(self.btn07)
                 self.Btn_8.clicked.connect(self.btn08)
 
                 self.sensor_widget = None
                 self.clock_widget = None 
 
-
-	#LED
+        # LED
         def btn01(self):
-                GPIO.output(red_pin, False)
+                red_pwm.ChangeDutyCycle(100)  # 최대 밝기
                 print("LED ON")
 
         def btn02(self):
-                GPIO.output(red_pin, True) 
+                red_pwm.ChangeDutyCycle(0)  # 최소 밝기 (LED 꺼짐)
                 print("LED OFF")
-	#ALARM
+
+        def change_brightness(self, value):
+                red_pwm.ChangeDutyCycle(value)
+                print(f"Brightness: {value}")
+
+        # ALARM
         def btn05(self):
                 self.clock_widget = MyClock()
                 self.clock_widget.show()
@@ -71,18 +77,14 @@ class WindowClass(QMainWindow, form_class):
                 print("Alarm OFF")
                 QtCore.QTimer.singleShot(2000, self.turn_off_light)
 
-
         def turn_off_light(self):
                 GPIO.output(blue_pin, True)
 
-
-	#Temperature,Humidity
-        
+        # Temperature, Humidity
         def btn07(self):
                 self.sensor_widget = SensorWidget()
                 self.sensor_widget.show()
                 self.increment_log_num()
-
 
         def btn08(self):
                 if self.sensor_widget is not None:
